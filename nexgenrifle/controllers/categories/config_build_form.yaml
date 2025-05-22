@@ -1,0 +1,27 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Build Category
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/buildcategory/fields.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\BuildCategory
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/categories?tab=build
+
+# Create page
+create:
+    title: Create Build Category
+    redirect: marty/nexgenrifle/categories/update/build/:id
+    redirectClose: marty/nexgenrifle/categories?tab=build
+
+# Update page
+update:
+    title: Edit Build Category
+    redirect: marty/nexgenrifle/categories?tab=build
+    redirectClose: marty/nexgenrifle/categories?tab=build

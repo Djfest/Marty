@@ -1,0 +1,142 @@
+<div class="list-items">
+    <?php if ($formModel->list_items && $formModel->list_items->count()): ?>
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th style="width: 40px"></th>
+                    <th>Item</th>
+                    <th style="width: 120px">Price</th>
+                    <th style="width: 100px">Status</th>
+                    <th style="width: 80px">Qty</th>
+                    <th style="width: 120px">Total</th>
+                    <th style="width: 80px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($formModel->list_items as $item): ?>
+                    <tr>
+                        <td>
+                            <?php if ($item->priority > 0): ?>
+                                <span class="priority-indicator" title="Priority <?= $item->priority ?>">
+                                    <?= str_repeat('★', $item->priority) ?>
+                                </span>
+                            <?php endif ?>
+                        </td>
+                        <td>
+                            <strong><?= e($item->title) ?></strong>
+                            <?php if ($item->description): ?>
+                                <p class="description"><?= e($item->description) ?></p>
+                            <?php endif ?>
+                            <?php if ($item->product): ?>
+                                <span class="catalog-link">
+                                    <a href="<?= Backend::url('marty/nexgenrifle/products/preview/'.$item->product_id) ?>" target="_blank">
+                                        View in Catalog
+                                    </a>
+                                </span>
+                            <?php endif ?>
+                        </td>
+                        <td>
+                            <?= Backend::$currency . number_format($item->price, 2) ?>
+                        </td>
+                        <td>
+                            <span class="status-label status-<?= $item->status ?>">
+                                <?= ucfirst($item->status) ?>
+                            </span>
+                        </td>
+                        <td>
+                            <?= $item->quantity ?>
+                        </td>
+                        <td>
+                            <?= Backend::$currency . number_format($item->total_price, 2) ?>
+                        </td>
+                        <td class="text-right">
+                            <button 
+                                type="button"
+                                class="btn btn-sm btn-default"
+                                data-request="onOpenItemForm"
+                                data-request-data="item_id: '<?= $item->id ?>'"
+                                data-load-indicator="Editing item...">
+                                <i class="icon-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-right">
+                        <strong>Total:</strong>
+                    </td>
+                    <td colspan="2">
+                        <strong><?= Backend::$currency . number_format($formModel->current_total, 2) ?></strong>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    <?php else: ?>
+        <p class="no-data">No items have been added to this list yet.</p>
+    <?php endif ?>
+
+    <div class="list-actions">
+        <button
+            type="button"
+            class="btn btn-primary"
+            data-request="onLoadCreateForm"
+            data-load-indicator="Loading form...">
+            Add Item
+        </button>
+
+        <?php if ($formModel->list_type === 'rifle_build'): ?>
+            <button
+                type="button"
+                class="btn btn-default"
+                data-request="onLoadProductPicker"
+                data-load-indicator="Loading catalog...">
+                Add from Catalog
+            </button>
+        <?php endif ?>
+    </div>
+</div>
+
+<style>
+.list-items .priority-indicator {
+    color: #f1c40f;
+    font-size: 12px;
+}
+
+.list-items .description {
+    color: #666;
+    font-size: 12px;
+    margin: 2px 0 0;
+}
+
+.list-items .catalog-link {
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.list-items .status-label {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    color: white;
+}
+
+.list-items .status-planned { background: #3498db; }
+.list-items .status-researching { background: #f1c40f; }
+.list-items .status-selected { background: #9b59b6; }
+.list-items .status-ordered { background: #e67e22; }
+.list-items .status-acquired { background: #27ae60; }
+.list-items .status-removed { background: #95a5a6; }
+
+.list-items .list-actions {
+    margin-top: 20px;
+}
+
+.list-items .no-data {
+    color: #666;
+    text-align: center;
+    padding: 20px;
+}
+</style>

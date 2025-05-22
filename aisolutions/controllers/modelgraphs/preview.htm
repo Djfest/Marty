@@ -1,0 +1,19 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('marty/aisolutions/modelgraphs') ?>">Model Graphs</a></li>
+        <li>Preview Graph</li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <div class="form-preview">
+        <?= $this->formRenderPreview() ?>
+    </div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('marty/aisolutions/modelgraphs') ?>" class="btn btn-default">Return to model graphs list</a></p>
+
+<?php endif ?>

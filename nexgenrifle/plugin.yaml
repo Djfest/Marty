@@ -1,0 +1,61 @@
+plugin:
+    name: NexGen Rifle Builder
+    description: A rifle build configuration and management system
+    author: Marty
+    icon: oc-icon-wrench
+    homepage: ''
+    require:
+        - RainLab.User # Added dependency for the User plugin
+
+permissions:
+    marty.nexgenrifle.manage_builds:
+        tab: NexGen Rifle
+        label: Manage Rifle Builds
+    marty.nexgenrifle.manage_products:
+        tab: NexGen Rifle
+        label: Manage Product Catalog
+    marty.nexgenrifle.manage_categories:
+        tab: NexGen Rifle
+        label: Manage Categories
+    marty.nexgenrifle.manage_vendors:
+        tab: NexGen Rifle
+        label: Manage Vendors
+
+navigation:
+    nexgenrifle:
+        label: Rifle Builder
+        url: marty/nexgenrifle/riflebuilds
+        icon: icon-wrench
+        permissions:
+            - marty.nexgenrifle.manage_builds
+        sideMenu:
+            builds:
+                label: Builds
+                url: marty/nexgenrifle/riflebuilds
+                icon: icon-list
+                permissions:
+                    - marty.nexgenrifle.manage_builds
+            products:
+                label: Products
+                url: marty/nexgenrifle/products
+                icon: icon-cube
+                permissions:
+                    - marty.nexgenrifle.manage_products
+            categories:
+                label: Categories
+                url: marty/nexgenrifle/categories
+                icon: icon-folder
+                permissions:
+                    - marty.nexgenrifle.manage_categories
+            vendors:
+                label: Vendors
+                url: marty/nexgenrifle/vendors
+                icon: icon-building
+                permissions:
+                    - marty.nexgenrifle.manage_vendors
+            profiles:
+                label: User Profiles
+                url: marty/nexgenrifle/profiles
+                icon: icon-user
+                permissions:
+                    - marty.nexgenrifle.manage_builds

@@ -1,0 +1,39 @@
+fields:
+    profile_type:
+        label: Profile Type
+        type: relation
+        nameFrom: name
+        span: auto
+        required: true
+        
+    ai_enabled:
+        label: AI Enabled
+        span: auto
+        type: switch
+        default: false
+        comment: Enable AI features for this profile type
+        
+tabs:
+    fields:
+        metadata:
+            tab: Metadata
+            label: Metadata
+            type: codeeditor
+            size: giant
+            language: json
+            commentAbove: Configure AI-specific metadata for this profile type
+            
+        settings:
+            tab: Settings
+            label: Settings
+            type: codeeditor
+            size: giant
+            language: json
+            commentAbove: Configure AI behavior settings for this profile type
+            
+        description:
+            tab: Documentation
+            label: Description
+            type: richeditor
+            size: huge
+            span: full

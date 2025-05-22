@@ -1,0 +1,35 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    serial_number:
+        label: Serial Number
+        searchable: true
+        sortable: true
+
+    batch_number:
+        label: Batch
+        searchable: true
+        sortable: true
+
+    status:
+        label: Status
+        type: partial
+        path: $/marty/nexgenrifle/models/productitem/_status_column.htm
+        sortable: true
+
+    rifle_build:
+        label: Build
+        relation: rifle_item.rifle_build
+        select: title
+        sortable: true
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Profile Type
+
+# Model Form Field configuration
+form: $/nexgenrifle/nexgenrifle/models/profiletype/fields.yaml
+
+# Model Class name
+modelClass: NexgenRifle\NexgenRifle\Models\ProfileType
+
+# Default redirect location
+defaultRedirect: nexgenrifle/nexgenrifle/profiletype
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: nexgenrifle/nexgenrifle/profiletype/update/:id
+    redirectClose: nexgenrifle/nexgenrifle/profiletype
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: nexgenrifle/nexgenrifle/profiletype
+    redirectClose: nexgenrifle/nexgenrifle/profiletype
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

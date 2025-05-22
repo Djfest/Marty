@@ -1,0 +1,28 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    user:
+        label: User
+        relation: user # Relation name in UserProfile model
+        select: concat(first_name, ' ', last_name, ' (', email, ')') # Fields from RainLab\User\Models\User
+        searchable: true
+
+    # Add any custom fields from your UserProfile model that you want to display in the list.
+    # For example, if you added 'some_profile_text_field' to your UserProfile model and table:
+    # some_profile_text_field:
+    #     label: 'Some Profile Text'
+    #     searchable: true
+
+    created_at:
+        label: Created
+        type: datetime
+
+    updated_at:
+        label: Updated
+        type: datetime

@@ -1,0 +1,44 @@
+1.0.1:
+  - Initialize plugin.
+  - 1_0_0_create_base_tables.php
+1.0.2:
+  - Create build lists and build list items tables
+  - create_build_list_tables.php
+1.0.3:
+  - Created product catalog table
+  - 1_0_1_create_product_catalog_table.php
+1.0.4:
+  - Created product items table
+  - 1_0_2_create_product_items_table.php
+1.0.5:
+  - Created profile tables
+  - 1_0_3_create_profile_tables.php
+1.0.6:
+  - Created rifle builds table
+  - 1_0_4_create_rifle_builds_table.php
+  - Created categories table
+  - 1_0_5_create_categories_table.php
+1.0.7:
+  - Created rifle items table
+  - 1_0_5_create_rifle_items_table.php
+1.0.8:
+  - Created suppliers table
+  - create_suppliers_table.php
+1.0.9:
+  - Created product categories table
+  - create_product_categories_table.php
+1.1.0:
+  - Create create_profile_types_table
+  - create_profiletypes_table.php
+1.1.1:
+  - Add model profile types for API
+  - seed_profile_types.php
+1.1.2:
+  - Add rifle build profile type
+  - RifleBuildProfileType.php
+1.2.0:
+  - Add build list profile types
+  - BuildListProfileType.php
+1.2.1:
+  - Seed NexGenRifle Profiletype data for 🤖
+  - seed_nexgenrifle_profiletypes_table.php

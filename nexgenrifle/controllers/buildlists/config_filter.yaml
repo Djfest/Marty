@@ -1,0 +1,79 @@
+# ===================================
+#  Filter Behavior Config
+# ===================================
+
+scopes:
+
+    list_type:
+        label: List Type
+        type: dropdown
+        conditions: list_type = :value
+        options:
+            rifle_build: Rifle Build
+            gift_list: Gift List
+            project_list: Project List
+
+    status:
+        label: Status
+        type: dropdown
+        conditions: status = :value
+        options:
+            planning: Planning
+            in_progress: In Progress
+            completed: Completed
+            on_hold: On Hold
+            archived: Archived
+
+    target_date:
+        label: Target Date
+        type: daterange
+        conditions: target_date >= ':after' AND target_date <= ':before'
+
+    date:
+        label: Created Date
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
+
+    search:
+        label: Search
+        type: text
+        conditions: "name LIKE '%:search%' OR description LIKE '%:search%'"
+        searchable: true
+
+    budget_range:
+        label: Budget Range
+        type: numberrange
+        conditions:
+            - total_budget >= ':min'
+            - total_budget <= ':max'
+
+    progress:
+        label: Progress
+        type: group
+        conditions: is_completed = :value
+        options:
+            0: In Progress
+            1: Completed
+
+groups:
+    rifle_builds:
+        name: Rifle Builds
+        scope:
+            - list_type: rifle_build
+
+    gift_lists:
+        name: Gift Lists
+        scope:
+            - list_type: gift_list
+
+    project_lists:
+        name: Project Lists
+        scope:
+            - list_type: project_list
+
+    active_lists:
+        name: Active Lists
+        scope:
+            - status: planning
+            - status: in_progress
+            - status: on_hold

@@ -1,0 +1,59 @@
+<?php
+$statuses = [
+    'planning' => [
+        'color' => '3498db',
+        'label' => 'Planning'
+    ],
+    'in_progress' => [
+        'color' => 'f1c40f',
+        'label' => 'In Progress'
+    ],
+    'completed' => [
+        'color' => '27ae60',
+        'label' => 'Completed'
+    ],
+    'on_hold' => [
+        'color' => 'e67e22',
+        'label' => 'On Hold'
+    ],
+    'archived' => [
+        'color' => '95a5a6',
+        'label' => 'Archived'
+    ]
+];
+
+$status = $record->status;
+$statusInfo = $statuses[$status] ?? ['color' => '666666', 'label' => $status];
+?>
+
+<div class="status-wrapper">
+    <span class="oc-status-label status-<?= $status ?>" data-status-color="#<?= $statusInfo['color'] ?>">
+        <?= e($statusInfo['label']) ?>
+    </span>
+
+    <?php if ($record->list_type === 'rifle_build'): ?>
+        <i class="icon-rifle list-type-icon"></i>
+    <?php endif ?>
+</div>
+
+<style>
+.status-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.oc-status-label {
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    text-transform: uppercase;
+    background-color: attr(data-status-color);
+}
+
+.list-type-icon {
+    margin-left: 5px;
+    color: #666;
+    font-size: 14px;
+}
+</style>

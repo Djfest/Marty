@@ -1,0 +1,22 @@
+1.0.1: First version of AiSolutions
+    - Add AI Session
+    - create_sessions_table.php
+
+1.0.2: 
+    - Add model changes tracking and deeper class introspection
+    - create_model_changes_table.php
+1.0.3:
+    - Add relation mapping and model graphs
+    - create_model_graphs_table.php
+1.0.4:
+    - Add Profile Type Extensions
+    - create_profile_type_extensions_table.php
+1.0.5:
+    - Add AI knowledge base
+    - create_ai_knowledge_base_table.php
+1.0.6:
+    - Add AI Messages
+    - create_messages_table.php
+1.0.7:
+    - NexGEN AI automation Assistant 🤖
+    - seed_AISolutions_profiletype_table.php

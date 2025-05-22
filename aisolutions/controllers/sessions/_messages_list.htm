@@ -1,0 +1,48 @@
+<?php if (!$this->fatalError): ?>
+
+    <div class="control-list">
+        <table class="table data" data-control="rowlink">
+            <thead>
+                <tr>
+                    <th style="width: 150px">Source</th>
+                    <th style="width: 150px">Context</th>
+                    <th>Message</th>
+                    <th style="width: 150px">Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($formModel->messages as $message): ?>
+                    <tr>
+                        <td>
+                            <?= e($message->source) ?>
+                            <?php if ($message->author): ?>
+                                (<?= e($message->author) ?>)
+                            <?php endif ?>
+                        </td>
+                        <td><?= e($message->context_key) ?></td>
+                        <td>
+                            <div style="max-height: 100px; overflow-y: auto;">
+                                <?= nl2br(e($message->message)) ?>
+                            </div>
+                            <?php if ($message->file_path): ?>
+                                <small class="text-muted">
+                                    <i class="icon-file-o"></i>
+                                    <?= e($message->file_path) ?>
+                                </small>
+                            <?php endif ?>
+                        </td>
+                        <td><?= Backend::dateTime($message->created_at) ?></td>
+                    </tr>
+                <?php endforeach ?>
+                <?php if (!$formModel->messages->count()): ?>
+                    <tr>
+                        <td colspan="4" class="noData">No messages found</td>
+                    </tr>
+                <?php endif ?>
+            </tbody>
+        </table>
+    </div>
+
+<?php else: ?>
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+<?php endif ?>

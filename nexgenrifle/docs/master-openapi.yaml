@@ -1,0 +1,430 @@
+openapi: 3.1.0
+info:
+  title: NexGen Rifle Builder API - Extended Version
+  description: |
+    Extended API specification for external services that can process comprehensive OpenAPI schemas.
+    This version contains detailed information about all models and endpoints in the system.
+    
+    ## Self-Describing API
+    This API implements a self-describing mechanism using ProfileTypes.
+    Each resource has an associated ProfileType that describes its structure,
+    required fields, relationships, and more.
+    
+    Use the `/profile-types` endpoints to access this metadata.
+  version: 1.0.0
+
+servers:
+  - url: https://nexgenrifle.com/api/v1
+    description: Production server
+
+security:
+  - bearerAuth: []
+
+paths:
+  # Generic resource endpoints
+  /resources/{resource}:
+    # ...existing code from main openapi.yaml...
+
+  /resources/{resource}/{id}:
+    # ...existing code from main openapi.yaml...
+
+  # Batch operations
+  /batch:
+    # ...existing code from main openapi.yaml...
+
+  # Flexible processing endpoint
+  /process:
+    # ...existing code from main openapi.yaml...
+
+  # ProfileTypes endpoints
+  /profile-types:
+    # ...existing code from main openapi.yaml...
+
+  /profile-types/{resource}:
+    # ...existing code from main openapi.yaml...
+
+  # Model-specific endpoints (auto-generated from ProfileTypes)
+  # This section is generated dynamically based on available ProfileTypes
+  # Each model will have standard CRUD endpoints following this pattern:
+  
+  # Example for BuildList model:
+  /build-lists:
+    get:
+      operationId: listBuildLists
+      summary: List all build lists
+      description: Get a list of all build lists
+      parameters:
+        - name: sort
+          in: query
+          schema:
+            type: string
+        - name: filter
+          in: query
+          schema:
+            type: string
+        - name: with
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of build lists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildListList'
+    post:
+      operationId: createBuildList
+      summary: Create a new build list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildListCreate'
+      responses:
+        '201':
+          description: Build list created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildListResponse'
+
+  /build-lists/{id}:
+    get:
+      operationId: getBuildList
+      summary: Get a specific build list
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: with
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Build list details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildListResponse'
+    put:
+      operationId: updateBuildList
+      summary: Update a build list
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildListUpdate'
+      responses:
+        '200':
+          description: Build list updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildListResponse'
+    delete:
+      operationId: deleteBuildList
+      summary: Delete a build list
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Build list deleted
+
+  # Additional model-specific operations can be included here
+  # These would be extended versions of operations available through generic endpoints
+  /build-lists/{id}/items:
+    get:
+      operationId: listBuildListItems
+      summary: List items in build list
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuildListItem'
+
+    post:
+      operationId: addBuildListItems
+      summary: Add items to build list
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - items
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BuildListItemCreate'
+                options:
+                  type: object
+                  properties:
+                    validate_compatibility:
+                      type: boolean
+                    skip_notifications:
+                      type: boolean
+      responses:
+        '201':
+          description: Items added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BuildListItem'
+                  meta:
+                    type: object
+                    properties:
+                      added_count:
+                        type: integer
+                        
+  # Advanced endpoints section
+  # These endpoints provide specialized functionality beyond basic CRUD
+  # The functionality can also be achieved through the generic /process endpoint
+  
+  # [Additional model-specific endpoints would be included here]
+
+components:
+  schemas:
+    # Generic schema definitions
+    ResourceList:
+      # ...existing code from main openapi.yaml...
+
+    ResourceResponse:
+      # ...existing code from main openapi.yaml...
+
+    ProcessResponse:
+      # ...existing code from main openapi.yaml...
+
+    BatchOperation:
+      # ...existing code from main openapi.yaml...
+
+    ProfileType:
+      # ...existing code from main openapi.yaml...
+
+    ApiResponseMetadata:
+      # ...existing code from main openapi.yaml...
+
+    # Model-specific schemas (auto-generated from ProfileTypes)
+    # This section would contain schemas for all models in the system
+    BuildListList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildList'
+        _meta:
+          $ref: '#/components/schemas/ApiResponseMetadata'
+
+    BuildListResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/BuildList'
+        _meta:
+          $ref: '#/components/schemas/ApiResponseMetadata'
+
+    BuildList:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        list_type:
+          type: string
+          enum: [rifle_build, gift_list, project_list]
+        status:
+          type: string
+          enum: [planning, in_progress, completed, on_hold, archived]
+        target_date:
+          type: string
+          format: date
+        total_budget:
+          type: number
+          format: float
+        current_total:
+          type: number
+          format: float
+        percentage_complete:
+          type: integer
+        config:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            items:
+              type: object
+              properties:
+                href:
+                  type: string
+
+    BuildListCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        list_type:
+          type: string
+          enum: [rifle_build, gift_list, project_list]
+        status:
+          type: string
+          enum: [planning, in_progress, completed, on_hold, archived]
+        target_date:
+          type: string
+          format: date
+        total_budget:
+          type: number
+          format: float
+        config:
+          type: object
+
+    BuildListUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        target_date:
+          type: string
+          format: date
+        total_budget:
+          type: number
+          format: float
+        config:
+          type: object
+
+    BuildListItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [planned, researching, selected, ordered, acquired, removed]
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        priority:
+          type: integer
+        product_id:
+          type: integer
+        product_url:
+          type: string
+        metadata:
+          type: object
+
+    BuildListItemCreate:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+        product_id:
+          type: integer
+        price:
+          type: number
+        quantity:
+          type: integer
+        priority:
+          type: integer
+        status:
+          type: string
+        metadata:
+          type: object
+
+    # [Additional model-specific schemas would be included here]
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Resources
+    description: Generic resource management
+  - name: Batch
+    description: Batch operations
+  - name: Process
+    description: Data processing operations
+  - name: ProfileTypes
+    description: Model metadata and API documentation
+  - name: BuildLists
+    description: Build list management
+  # [Additional model-specific tags would be included here]

@@ -1,0 +1,36 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Name
+        span: left
+        required: true
+
+    slug:
+        label: Slug
+        span: right
+        preset: name
+        required: true
+
+    description:
+        label: Description
+        type: textarea
+        size: small
+
+tabs:
+    fields:
+        config:
+            tab: Advanced
+            label: Configuration
+            type: codeeditor
+            language: json
+            size: large
+            comment: Additional configuration in JSON format
+
+        rifle_builds:
+            tab: Builds
+            type: partial
+            path: $/marty/nexgenrifle/controllers/categories/_build_list.htm
+            span: full

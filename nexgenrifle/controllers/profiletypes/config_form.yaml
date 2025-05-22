@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Profile Type
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/profiletype/fields.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\ProfileType
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/profiletypes
+
+# Create page
+create:
+    title: Create Profile Type
+    redirect: marty/nexgenrifle/profiletypes/update/:id
+    redirectClose: marty/nexgenrifle/profiletypes
+
+# Update page
+update:
+    title: Edit Profile Type
+    redirect: marty/nexgenrifle/profiletypes
+    redirectClose: marty/nexgenrifle/profiletypes
+
+# Preview page
+preview:
+    title: Preview Profile Type

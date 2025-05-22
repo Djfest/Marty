@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Profile
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/userprofile/fields.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\UserProfile
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/profiles
+
+# Create page
+create:
+    title: Create Profile
+    redirect: marty/nexgenrifle/profiles/update/:id
+    redirectClose: marty/nexgenrifle/profiles
+
+# Update page
+update:
+    title: Edit Profile
+    redirect: marty/nexgenrifle/profiles
+    redirectClose: marty/nexgenrifle/profiles
+
+# Preview page
+preview:
+    title: Preview Profile

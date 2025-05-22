@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Rifle Build
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/riflebuild/fields.yaml
+
+# Model Class name
+modelClass: NexgenRifle\NexgenRifle\Models\RifleBuild
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/riflebuild
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: marty/nexgenrifle/riflebuild/update/:id
+    redirectClose: marty/nexgenrifle/riflebuild
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: marty/nexgenrifle/riflebuild
+    redirectClose: marty/nexgenrifle/riflebuild
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

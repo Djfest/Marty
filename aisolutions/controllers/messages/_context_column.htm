@@ -1,0 +1,11 @@
+{% set contextClass = {
+    'debugging': 'info',
+    'solution': 'success',
+    'insight': 'primary',
+    'question': 'warning',
+    'error': 'danger'
+} %}
+
+<span class="oc-status status-{{ contextClass[record.context_key] ?? 'default' }}">
+    {{ record.context_key|title }}
+</span>

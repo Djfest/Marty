@@ -1,0 +1,33 @@
+fields:
+    name:
+        label: Name
+        span: full
+        required: true
+        type: text
+        
+    description:
+        label: Description
+        span: full
+        size: large
+        type: textarea
+        
+tabs:
+    fields:
+        nodes:
+            tab: Graph Data
+            label: Number of Nodes
+            type: number
+            span: auto
+            
+        relationships:
+            tab: Graph Data
+            label: Number of Relationships
+            type: number
+            span: auto
+            
+        graph_data:
+            tab: Graph Data
+            label: Graph Structure
+            type: codeeditor
+            size: giant
+            language: json

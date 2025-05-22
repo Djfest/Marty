@@ -1,0 +1,116 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Name
+        span: left
+        required: true
+
+    namespace:
+        label: Namespace
+        span: right
+
+    type:
+        label: Type
+        span: left
+
+    access:
+        label: Access
+        span: right
+
+    description:
+        label: Description
+        type: textarea
+        size: small
+        span: full
+
+tabs:
+    fields:
+        is_active:
+            label: Active
+            type: switch
+            default: true
+            tab: Settings
+            span: left
+
+        is_featured:
+            label: Featured
+            type: switch
+            default: false
+            tab: Settings
+            span: right
+
+        is_default:
+            label: Default
+            type: switch
+            default: false
+            tab: Settings
+            span: left
+
+        ai_enabled:
+            label: AI Enabled
+            type: switch
+            default: false
+            tab: Settings
+            span: right
+
+        icon:
+            label: Icon
+            tab: Settings
+            span: left
+
+        model_class:
+            label: Model Class
+            tab: Settings
+            span: right
+
+        api_endpoint:
+            label: API Endpoint
+            tab: API
+            span: left
+
+        api_version:
+            label: API Version
+            tab: API
+            span: right
+
+        api_methods:
+            label: API Methods
+            type: codeeditor
+            language: json
+            size: small
+            tab: API
+            span: left
+
+        api_help:
+            label: API Help
+            type: codeeditor
+            language: json
+            size: small
+            tab: API
+            span: right
+
+        conversation_analysis:
+            label: Conversation Analysis
+            type: codeeditor
+            language: json
+            size: small
+            tab: AI
+            span: full
+
+        prompt_instructions:
+            label: Prompt Instructions
+            type: textarea
+            size: large
+            tab: AI
+            span: full
+
+        metadata:
+            label: Metadata
+            type: codeeditor
+            language: json
+            size: large
+            tab: Advanced
+            span: full

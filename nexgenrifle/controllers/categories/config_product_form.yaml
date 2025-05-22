@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Product Category
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/productcategory/fields.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\ProductCategory
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/categories?tab=product
+
+# Create page
+create:
+    title: Create Product Category
+    redirect: marty/nexgenrifle/categories/update/product/:id
+    redirectClose: marty/nexgenrifle/categories?tab=product
+
+# Update page
+update:
+    title: Edit Product Category
+    redirect: marty/nexgenrifle/categories?tab=product
+    redirectClose: marty/nexgenrifle/categories?tab=product
+
+# Reorder page
+reorder:
+    title: Reorder Product Categories

@@ -1,0 +1,22 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+rifleBuilds:
+    label: Rifle Builds
+    view:
+        list: $/marty/nexgenrifle/models/riflebuild/columns.yaml
+        toolbarButtons: create|delete
+        recordUrl: marty/nexgenrifle/riflebuilds/update/:id
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+
+socialConnections:
+    label: Social Connections
+    view:
+        list: $/marty/nexgenrifle/models/socialconnection/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/marty/nexgenrifle/models/socialconnection/fields.yaml
+        recordsPerPage: 10

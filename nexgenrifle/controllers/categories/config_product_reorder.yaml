@@ -1,0 +1,19 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+# Reorder title
+title: Reorder Product Categories
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\ProductCategory
+
+# Name column to identify records
+nameFrom: name
+
+# Array of columns to display
+toolbar:
+    buttons: reorder_toolbar
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records

@@ -1,0 +1,42 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        
+    name:
+        label: Name
+        searchable: true
+        
+    namespace:
+        label: Namespace
+        searchable: true
+        
+    type:
+        label: Type
+        searchable: true
+        
+    access:
+        label: Access
+        searchable: true
+        
+    is_active:
+        label: Active
+        type: switch
+        
+    is_featured:
+        label: Featured
+        type: switch
+        
+    created_at:
+        label: Created
+        type: datetime
+        invisible: true
+        
+    updated_at:
+        label: Updated
+        type: datetime
+        invisible: true

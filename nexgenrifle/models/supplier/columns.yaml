@@ -1,0 +1,59 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        sortable: true
+
+    name:
+        label: Name
+        type: text
+        searchable: true
+        sortable: true
+
+    slug:
+        label: Slug
+        type: text
+        searchable: true
+        sortable: true
+        invisible: true # Often not needed in main list view
+
+    website_url:
+        label: Website
+        type: text
+        searchable: false
+        sortable: false
+        # You could make this a clickable link if needed, using a partial
+
+    contact_email:
+        label: Email
+        type: text
+        searchable: true
+        sortable: true
+
+    is_active:
+        label: Active
+        type: switch # Displays as a toggle-like switch in the list
+        sortable: true
+
+    is_enabled:
+        label: Enabled
+        type: switch
+        sortable: true
+        invisible: true # Usually more of an internal flag
+
+    created_at:
+        label: Created
+        type: datetime
+        format: M d, Y h:i A # Example format: Jan 01, 2023 03:45 PM
+        sortable: true
+        invisible: true
+
+    updated_at:
+        label: Updated
+        type: datetime
+        format: M d, Y h:i A
+        sortable: true

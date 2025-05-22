@@ -1,0 +1,221 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('marty/aisolutions/sync') ?>">Model Sync</a></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+
+            <div class="form-buttons">
+                <div class="loading-indicator-container">
+                    <button 
+                        type="submit" 
+                        data-request="onSync"
+                        data-request-update="'sync/_sync_results': '#syncResults'"
+                        data-load-indicator="Syncing Models..."
+                        class="btn btn-primary">
+                        Sync Models
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('marty/aisolutions/sync') ?>" class="btn btn-default">Return to Model Sync List</a></p>
+<?php endif ?>
+
+<div id="syncResults"></div>
+
+<?php Block::put('body') ?>
+    <div class="layout-row">
+<div class="toolbar">
+        <button
+            type="button"
+            class="btn btn-secondary"
+            id="aiEnabledModelsButton">
+            Show AI Enabled Models
+        </button>
+        <button
+            type="button"
+            class="btn btn-secondary"
+            id="aiDisabledModelsButton">
+            Show AI Disabled Models
+        </button>
+    </div>
+
+<div class="row">
+    <?php foreach ($profileTypes as $profileType): ?>
+        <div class="col-md-4">
+            <div class="card">
+<div class="card-body">
+                    <h5 class="card-title"><?= e($profileType->name) ?></h5>
+                    <p class="card-text">Model: <?= e($profileType->model_class) ?> </p>
+                    <div class="btn-group">
+                        <?php if ($profileType->ai_enabled == 1): ?>
+                            <button
+                                type="button"
+                                class="btn btn-danger toggle-ai-button"
+                                data-profile-type-id="<?= $profileType->id ?>"
+                                data-ai-enabled="1"
+                                >
+                                Disable AI
+                            </button>
+                        <?php else: ?>
+                            <button
+                                type="button"
+                                class="btn btn-success toggle-ai-button"
+                                data-profile-type-id="<?= $profileType->id ?>"
+                                data-ai-enabled="0"
+                                >
+                                Enable AI
+                            </button>
+                        <?php endif; ?>
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            onclick="showDatabaseDetails(<?= $profileType->id ?>)"
+                            >
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+    
+    
+
+<script>
+    $(document).ready(function() {
+        $('#aiEnabledModelsButton').click(function() {
+            $('.col-md-4').each(function() {
+                var aiEnabled = $(this).find('.toggle-ai-button').data('ai-enabled');
+                if (aiEnabled == 1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        $('#aiDisabledModelsButton').click(function() {
+            $('.col-md-4').each(function() {
+                var aiEnabled = $(this).find('.toggle-ai-button').data('ai-enabled');
+                if (aiEnabled == 0) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        $('.toggle-ai-button').click(function() {
+            var profileTypeId = $(this).data('profile-type-id');
+            var aiEnabled = $(this).data('ai-enabled');
+            var button = $(this);
+
+            console.log('Button clicked');
+            console.log('Profile Type ID:', profileTypeId);
+            console.log('Current AI Enabled:', aiEnabled);
+
+            $.oc.stripeLoadIndicator.show();
+            $.request('onToggleAiEnabled', {
+                data: { profile_type_id: profileTypeId },
+                complete: function() {
+                    $.oc.stripeLoadIndicator.hide();
+                },
+                success: function(data) {
+                    console.log('AJAX Success:', data);
+                    if (data.success) {
+                        var newAiEnabled = data.ai_enabled;
+                        button.data('ai-enabled', newAiEnabled);
+                        if (newAiEnabled == 1) {
+                            button.removeClass('btn-success').addClass('btn-danger').text('Disable AI');
+                        } else {
+                            button.removeClass('btn-danger').addClass('btn-success').text('Enable AI');
+                        }
+                    } else {
+                        console.error('Error:', data.message);
+                        alert(data.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error('AJAX Error:', xhr.responseText);
+                    alert('Error occurred during the request');
+                }
+            });
+        });
+    });
+</script>
+    <!-- Database Details Modal -->
+    <div class="modal fade" id="databaseDetailsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modal-content">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function onAiSolutionUpdate() {
+            alert('Called ASolution Update');
+            $('#databaseDetailsModal').modal('hide');
+        }
+
+        function showDatabaseDetails(profileTypeId) {
+            console.log('Showing database details for profile type:', profileTypeId);
+            
+            // Show loading state
+            $('#modal-content').html(`
+                <div class="modal-header">
+                    <h4 class="modal-title">Loading Details...</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="loading-indicator-container">
+                        <div class="loading-indicator">
+                            <span></span>
+                            <div>Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            `);
+            $('#databaseDetailsModal').modal('show');
+            
+            $.oc.stripeLoadIndicator.show();
+            $.request('onGetDatabaseDetails', {
+                data: { 
+                    profile_type_id: profileTypeId 
+                },
+                complete: function() {
+                    $.oc.stripeLoadIndicator.hide();
+                },
+                success: function(data) {
+                    console.log('Database details loaded');
+                    if (data['#modal-content']) {
+                        // Update modal content
+                        $('#modal-content').html(data['#modal-content']);
+                    } else {
+                        console.error('No modal content received');
+                        $('#modal-content').html('<div class="modal-body"><p>Error: No data received</p></div>');
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error loading database details:', xhr.responseText);
+                    $('#modal-content').html('<div class="modal-body"><p>Error loading database details</p></div>');
+                }
+            });
+        }
+    </script>
+</div>
+<?php Block::endPut() ?>

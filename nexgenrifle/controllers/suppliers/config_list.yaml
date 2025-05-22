@@ -1,0 +1,38 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# List Title
+title: Manage Suppliers
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\Supplier
+
+# List Title
+list: $/marty/nexgenrifle/models/supplier/columns.yaml
+
+# Records per page
+recordsPerPage: 20
+
+# Display page numbers with pagination, disable to improve performance 
+# on tables with many records.
+showPageNumbers: true
+
+# Displays the sorting link on each column to allow sorting by that column
+showSorting: true
+
+# Default sorting column
+defaultSort:
+    column: name
+    direction: asc
+
+# Display checkboxes next to each record to allow record selection
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: $/marty/nexgenrifle/controllers/suppliers/_list_toolbar.htm
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

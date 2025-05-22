@@ -1,0 +1,14 @@
+name: Model Graph
+modelClass: Marty\AiSolutions\Models\ModelGraph
+form: $/marty/aisolutions/models/modelgraph/fields.yaml
+defaultRedirect: marty/aisolutions/modelgraphs
+
+create:
+    title: Create Model Graph
+    redirect: marty/aisolutions/modelgraphs/update/:id
+    redirectClose: marty/aisolutions/modelgraphs
+
+update:
+    title: Edit Model Graph
+    redirect: marty/aisolutions/modelgraphs
+    redirectClose: marty/aisolutions/modelgraphs

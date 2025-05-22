@@ -1,0 +1,21 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+session:
+    label: Session
+    view:
+        list: $/marty/aisolutions/models/aisession/columns.yaml
+        toolbarButtons: link|unlink
+    manage:
+        list: $/marty/aisolutions/models/aisession/columns.yaml
+        form: $/marty/aisolutions/models/aisession/fields.yaml
+
+user:
+    label: User
+    view:
+        list: ~/modules/backend/models/user/columns.yaml
+        toolbarButtons: link|unlink
+    manage:
+        list: ~/modules/backend/models/user/columns.yaml
+        form: ~/modules/backend/models/user/fields.yaml

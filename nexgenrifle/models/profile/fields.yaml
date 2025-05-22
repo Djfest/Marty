@@ -1,0 +1,80 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Name
+        span: left
+        required: true
+    
+    slug:
+        label: Slug
+        span: right
+        preset: name
+
+tabs:
+    fields:
+        bio:
+            label: Biography
+            type: richeditor
+            size: large
+            tab: Basic Info
+        
+        location:
+            label: Location
+            tab: Basic Info
+            span: left
+        
+        website:
+            label: Website
+            tab: Basic Info
+            span: right
+        
+        contact_email:
+            label: Contact Email
+            tab: Contact
+            span: left
+        
+        contact_phone:
+            label: Contact Phone
+            tab: Contact
+            span: right
+        
+        is_active:
+            label: Active
+            type: switch
+            default: true
+            tab: Status
+        
+        user:
+            label: User Account
+            type: recordfinder
+            list: $/rainlab/user/models/user/columns.yaml
+            prompt: Find User
+            nameFrom: name
+            descriptionFrom: email
+            tab: User
+        
+        avatar:
+            label: Profile Image
+            type: fileupload
+            mode: image
+            imageWidth: 200
+            imageHeight: 200
+            tab: Media
+        
+        social_links:
+            label: Social Media Links
+            type: codeeditor
+            size: small
+            language: json
+            tab: Social
+            comment: JSON object with social network links
+        
+        metadata:
+            label: Additional Metadata
+            type: codeeditor
+            size: large
+            language: json
+            tab: Advanced

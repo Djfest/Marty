@@ -1,0 +1,11 @@
+<?php
+$statusClass = [
+    'available' => 'success',
+    'reserved' => 'warning',
+    'purchased' => 'primary',
+    'cancelled' => 'danger'
+][$record->status] ?? 'default';
+?>
+<span class="oc-icon-circle text-<?= $statusClass ?>">
+    <?= ucfirst($record->status) ?>
+</span>

@@ -1,0 +1,29 @@
+columns:
+    id:
+        label: ID
+        searchable: true
+        
+    name:
+        label: Name
+        searchable: true
+        
+    description:
+        label: Description
+        searchable: true
+        
+    nodes:
+        label: Number of Nodes
+        type: number
+        
+    relationships:
+        label: Number of Relationships
+        type: number
+        
+    created_at:
+        label: Created At
+        type: datetime
+        
+    updated_at:
+        label: Updated At
+        type: datetime
+        invisible: true

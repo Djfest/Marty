@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: User Profile
+
+# Model Form Field configuration
+form: $/nexgenrifle/nexgenrifle/models/userprofile/fields.yaml
+
+# Model Class name
+modelClass: NexgenRifle\NexgenRifle\Models\UserProfile
+
+# Default redirect location
+defaultRedirect: nexgenrifle/nexgenrifle/userprofile
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: nexgenrifle/nexgenrifle/userprofile/update/:id
+    redirectClose: nexgenrifle/nexgenrifle/userprofile
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: nexgenrifle/nexgenrifle/userprofile
+    redirectClose: nexgenrifle/nexgenrifle/userprofile
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

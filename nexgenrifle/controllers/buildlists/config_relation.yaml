@@ -1,0 +1,65 @@
+list_items:
+    label: List Items
+    view:
+        list: $/marty/nexgenrifle/models/buildlistitem/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/marty/nexgenrifle/models/buildlistitem/fields.yaml
+        recordsPerPage: 10
+        showCheckboxes: true
+    deferredBinding: true
+    emptyMessage: No items added yet
+
+products:
+    label: Products
+    view:
+        list: $/marty/nexgenrifle/models/product/columns.yaml
+        toolbarButtons: link|unlink
+        showSearch: true
+        showSorting: true
+        recordUrl: marty/nexgenrifle/products/preview/:id
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+        showCheckboxes: true
+        
+vendors:
+    label: Vendors
+    view:
+        list: $/marty/nexgenrifle/models/vendor/columns.yaml
+        toolbarButtons: link|unlink
+        showSearch: true
+        recordUrl: marty/nexgenrifle/vendors/preview/:id
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+        showCheckboxes: true
+        
+categories:
+    label: Categories
+    view:
+        list: $/marty/nexgenrifle/models/buildcategory/columns.yaml
+        toolbarButtons: link
+        showSearch: true
+        recordUrl: marty/nexgenrifle/categories/preview/:id
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+        showCheckboxes: true
+
+# Only shown for rifle builds
+rifle_parts:
+    label: Rifle Parts
+    view:
+        list: $/marty/nexgenrifle/models/rifleitem/columns.yaml
+        toolbarButtons: create|delete
+        showSearch: true
+        showSorting: true
+    manage:
+        form: $/marty/nexgenrifle/models/rifleitem/fields.yaml
+        recordsPerPage: 10
+        showCheckboxes: true
+    deferredBinding: true
+    scope: compatibleParts
+    emptyMessage: No rifle parts added
+    conditions: list_type = 'rifle_build'

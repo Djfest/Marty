@@ -1,0 +1,9 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# List Title
+title: Model Sync
+
+# Model List Column configuration
+columns: {}

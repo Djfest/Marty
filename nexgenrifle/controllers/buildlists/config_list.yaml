@@ -1,0 +1,43 @@
+list: $/marty/nexgenrifle/models/buildlist/columns.yaml
+modelClass: Marty\NexGenRifle\Models\BuildList
+title: Build Lists
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showCheckboxes: true
+showSetup: true
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+
+filter: config_filter.yaml
+
+structure:
+    showTree: false
+    showReorder: false
+
+defaultSort:
+    column: created_at
+    direction: desc
+
+scopes:
+    rifle_builds:
+        label: Rifle Builds
+        type: string
+        conditions: list_type = 'rifle_build'
+        
+    gift_lists:
+        label: Gift Lists
+        type: string
+        conditions: list_type = 'gift_list'
+        
+    project_lists:
+        label: Project Lists
+        type: string
+        conditions: list_type = 'project_list'
+    
+    active:
+        label: Active Lists
+        type: string
+        conditions: status != 'archived'

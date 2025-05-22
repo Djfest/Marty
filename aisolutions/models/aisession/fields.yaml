@@ -1,0 +1,33 @@
+fields:
+    code_session_id:
+        label: Session ID
+        span: auto
+        required: true
+        type: text
+
+    title:
+        label: Title
+        span: auto
+        type: text
+
+    active_file:
+        label: Active File
+        span: full
+        type: text
+
+    status:
+        label: Status
+        span: auto
+        type: dropdown
+        options:
+            open: Open
+            closed: Closed
+            archived: Archived
+        default: open
+
+tabs:
+    fields:
+        messages:
+            tab: Messages
+            type: partial
+            path: $/marty/aisolutions/controllers/sessions/_messages_list.htm

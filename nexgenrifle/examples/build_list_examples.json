@@ -1,0 +1,184 @@
+{
+    "examples": [
+        {
+            "type": "rifle_build",
+            "request": {
+                "operations": [
+                    {
+                        "method": "POST",
+                        "resource": "build-lists",
+                        "data": {
+                            "name": "AR-15 Competition Build",
+                            "description": "Custom competition rifle build",
+                            "list_type": "rifle_build",
+                            "total_budget": 2500.00,
+                            "config": {
+                                "notifications": {
+                                    "price_alerts": true,
+                                    "availability_alerts": true
+                                },
+                                "sorting": {
+                                    "default": "priority",
+                                    "grouping": "status"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "method": "POST",
+                        "resource": "build-list-items",
+                        "data": {
+                            "build_list_id": "{response.0.id}",
+                            "title": "Custom Upper Receiver",
+                            "product_id": 123,
+                            "price": 399.99,
+                            "priority": 1,
+                            "metadata": {
+                                "specifications": {
+                                    "material": "7075-T6 Aluminum",
+                                    "finish": "Type III Hardcoat Anodized"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "christmas_gifts",
+            "request": {
+                "operations": [
+                    {
+                        "method": "POST",
+                        "resource": "build-lists",
+                        "data": {
+                            "name": "Christmas 2025",
+                            "description": "Family gift list",
+                            "list_type": "gift_list",
+                            "target_date": "2025-12-25",
+                            "total_budget": 1000.00,
+                            "config": {
+                                "notifications": {
+                                    "price_drop": true,
+                                    "approaching_target": true
+                                },
+                                "display": {
+                                    "show_prices": false,
+                                    "show_progress": true
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "method": "POST",
+                        "resource": "build-list-items",
+                        "data": {
+                            "build_list_id": "{response.0.id}",
+                            "title": "Gaming Console",
+                            "description": "For Tommy",
+                            "price": 499.99,
+                            "priority": 1,
+                            "metadata": {
+                                "gift_wrap": true,
+                                "recipient": "Tommy",
+                                "age": 12,
+                                "alternatives": [
+                                    "Nintendo Switch",
+                                    "PlayStation 5"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "project_materials",
+            "request": {
+                "operations": [
+                    {
+                        "method": "POST",
+                        "resource": "build-lists",
+                        "data": {
+                            "name": "Workshop Renovation",
+                            "description": "Tools and materials needed",
+                            "list_type": "project_list",
+                            "total_budget": 5000.00,
+                            "config": {
+                                "sorting": {
+                                    "default": "priority",
+                                    "grouping": "vendor"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "method": "POST",
+                        "resource": "build-list-items",
+                        "data": [
+                            {
+                                "build_list_id": "{response.0.id}",
+                                "title": "Power Tools Set",
+                                "product_id": 456,
+                                "price": 799.99,
+                                "priority": 1,
+                                "vendor_id": 789
+                            },
+                            {
+                                "build_list_id": "{response.0.id}",
+                                "title": "Workbench Materials",
+                                "description": "Lumber and hardware",
+                                "price": 250.00,
+                                "priority": 2,
+                                "metadata": {
+                                    "materials": [
+                                        "2x4 lumber",
+                                        "Plywood",
+                                        "Screws",
+                                        "Brackets"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "response_examples": {
+        "build_list": {
+            "id": 123,
+            "name": "AR-15 Competition Build",
+            "status": "planning",
+            "status_label": "Planning",
+            "total_budget": 2500.00,
+            "current_total": 399.99,
+            "remaining_budget": 2100.01,
+            "percentage_complete": 0,
+            "list_items": [
+                {
+                    "id": 456,
+                    "title": "Custom Upper Receiver",
+                    "status": "planned",
+                    "status_label": "Planned",
+                    "price": 399.99,
+                    "priority": 1,
+                    "is_acquired": false,
+                    "_links": {
+                        "product": {
+                            "href": "/api/products/123"
+                        }
+                    }
+                }
+            ],
+            "_links": {
+                "self": {
+                    "href": "/api/build-lists/123"
+                },
+                "items": {
+                    "href": "/api/build-list-items?build_list_id=123"
+                }
+            }
+        }
+    }
+}

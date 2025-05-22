@@ -1,0 +1,37 @@
+columns:
+    code_session_id:
+        label: Session ID
+        searchable: true
+        sortable: true
+
+    title:
+        label: Title
+        searchable: true
+        sortable: true
+
+    active_file:
+        label: Active File
+        searchable: true
+
+    status:
+        label: Status
+        type: partial
+        path: $/marty/aisolutions/controllers/sessions/_status_column.htm
+        sortable: true
+
+    messages_count:
+        label: Messages
+        relation: messages
+        valueFrom: count
+        default: 0
+        sortable: true
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true
+
+    updated_at:
+        label: Last Updated
+        type: datetime
+        sortable: true

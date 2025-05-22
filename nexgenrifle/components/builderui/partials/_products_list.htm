@@ -1,0 +1,122 @@
+{% if products and products|length > 0 %}
+    <div class="products-grid">
+        {% for product in products %}
+            <div class="product-item">
+                <div class="product-info">
+                    <div class="name-vendor">
+                        <h5>{{ product.name }}</h5>
+                        <span class="vendor">{{ product.vendor.name }}</span>
+                    </div>
+                    <div class="price-stock">
+                        <span class="price">${{ product.price|number_format(2) }}</span>
+                        <span class="stock {{ product.stock_level > 0 ? 'in-stock' : 'out-of-stock' }}">
+                            {{ product.stock_level > 0 ? 'In Stock' : 'Out of Stock' }}
+                        </span>
+                    </div>
+                </div>
+                <div class="product-actions">
+                    <button 
+                        class="btn btn-primary"
+                        {{ product.stock_level == 0 ? 'disabled' }}
+                        data-request="onAddPart"
+                        data-request-data="product_id: {{ product.id }}, category: '{{ category }}'"
+                        data-request-update="'@self': '#rifleBuilder'"
+                        data-request-loading="#productLoader{{ product.id }}">
+                        Select
+                    </button>
+                    <div id="productLoader{{ product.id }}" class="loading-indicator-container">
+                        <div class="loading-indicator">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="no-products">
+        <p>No products found for this category.</p>
+    </div>
+{% endif %}
+
+<style>
+.products-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.product-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-info {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.name-vendor h5 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+}
+
+.vendor {
+    font-size: 12px;
+    color: #666;
+}
+
+.price-stock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.stock {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.in-stock {
+    background: #d4edda;
+    color: #155724;
+}
+
+.out-of-stock {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.no-products {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.product-actions {
+    position: relative;
+}
+
+.loading-indicator-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.loading-indicator-container.is-loading {
+    display: block;
+}
+</style>

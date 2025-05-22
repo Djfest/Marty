@@ -1,0 +1,52 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    group_key:
+        label: Group
+        searchable: true
+        sortable: true
+
+    name:
+        label: Name
+        searchable: true
+        sortable: true
+
+    slug:
+        label: Slug
+        searchable: true
+        sortable: true
+
+    order:
+        label: Sort Order
+        sortable: true
+        width: 100px
+
+    product_catalog_count:
+        label: Products
+        relation: product_catalog
+        useRelationCount: true
+        sortable: true
+
+    rifle_items_count:
+        label: Build Uses
+        relation: rifle_items
+        useRelationCount: true
+        sortable: true
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true
+        invisible: true
+
+    updated_at:
+        label: Updated
+        type: datetime
+        sortable: true
+        invisible: true

@@ -1,0 +1,13 @@
+title: Profile Type Extensions
+modelClass: Marty\AiSolutions\Models\ProfileTypeExtension
+list: $/marty/aisolutions/models/profiletypeextension/columns.yaml
+recordUrl: marty/aisolutions/profiletypeextensions/update/:id
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

@@ -1,0 +1,38 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/marty/aisolutions/models/aisession/columns.yaml
+
+# Model Class name
+modelClass: Marty\AiSolutions\Models\AISession
+
+# List Title
+title: Manage AI Sessions
+
+# Link URL for each record
+recordUrl: marty/aisolutions/sessions/update/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# Display page numbers with pagination, disable to improve performance
+showPageNumbers: true
+
+# Displays the list column headers
+showSorting: true
+
+# Default sorting column
+defaultSort:
+    column: created_at
+    direction: desc
+
+# Display checkboxes next to each record
+showCheckboxes: true
+
+# Filter widget configuration
+filter: {}

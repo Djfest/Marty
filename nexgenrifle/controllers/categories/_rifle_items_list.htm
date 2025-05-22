@@ -1,0 +1,9 @@
+<?php if (!$this->fatalError): ?>
+
+    <?= $this->relationRender('rifle_items', ['readOnly' => true]) ?>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+
+<?php endif ?>

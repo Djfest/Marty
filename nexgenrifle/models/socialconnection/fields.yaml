@@ -1,0 +1,58 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    provider:
+        label: Provider
+        type: dropdown
+        options:
+            facebook: Facebook
+            google: Google
+            twitter: Twitter
+            github: GitHub
+            linkedin: LinkedIn
+        span: left
+        required: true
+    
+    provider_id:
+        label: Provider ID
+        span: right
+        required: true
+    
+    nickname:
+        label: Nickname
+        span: left
+    
+    name:
+        label: Name
+        span: right
+    
+    email:
+        label: Email
+        span: left
+    
+    avatar:
+        label: Avatar URL
+        span: right
+    
+    token:
+        label: Access Token
+        type: sensitive
+        comment: Sensitive data
+    
+    refresh_token:
+        label: Refresh Token
+        type: sensitive
+        comment: Sensitive data
+    
+    expires_at:
+        label: Expires At
+        type: datepicker
+        mode: datetime
+    
+    data:
+        label: Provider Data
+        type: codeeditor
+        size: large
+        language: json

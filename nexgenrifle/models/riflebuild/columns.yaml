@@ -1,0 +1,55 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    title:
+        label: Title
+        searchable: true
+        sortable: true
+
+    user:
+        label: User
+        relation: user
+        select: concat(first_name, ' ', last_name)
+        searchable: true
+
+    build_category:
+        label: Category
+        relation: build_category
+        select: name
+        sortable: true
+
+    status:
+        label: Status
+        type: text
+        searchable: true
+        sortable: true
+
+    total_price:
+        label: Total Price
+        type: price
+        sortable: true
+
+    purchase_state:
+        label: Purchase Status
+        sortable: true
+
+    stock_state:
+        label: Stock Status
+        sortable: true
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true
+
+    updated_at:
+        label: Updated
+        type: datetime
+        sortable: true
+        invisible: true

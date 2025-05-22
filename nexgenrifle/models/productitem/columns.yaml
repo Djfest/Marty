@@ -1,0 +1,51 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        
+    title:
+        label: Title
+        searchable: true
+        
+    status:
+        label: Status
+        searchable: true
+        
+    price:
+        label: Price
+        type: number
+        format: "${value}"
+        
+    quantity:
+        label: Quantity
+        type: number
+        
+    priority:
+        label: Priority
+        type: number
+        
+    product_catalog:
+        label: Product
+        relation: product_catalog
+        select: title
+        searchable: true
+        
+    build_list:
+        label: Build List
+        relation: build_list
+        select: title
+        searchable: true
+        
+    created_at:
+        label: Created
+        type: datetime
+        invisible: true
+        
+    updated_at:
+        label: Updated
+        type: datetime
+        invisible: true

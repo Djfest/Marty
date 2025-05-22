@@ -1,0 +1,18 @@
+<?php if (!empty($results)): ?>
+    <div class="sync-results">
+        <h4>Sync Results</h4>
+        <div class="results-summary">
+            <p>Successfully synced: <?= $successCount ?></p>
+            <p>Errors: <?= $errorCount ?></p>
+        </div>
+
+        <div class="list-group">
+            <?php foreach ($results as $result): ?>
+                <div class="list-group-item <?= $result['status'] === 'success' ? 'success' : 'error' ?>">
+                    <h5><?= e($result['name'] ?? 'Unknown') ?></h5>
+                    <p><?= e($result['message']) ?></p>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+<?php endif ?>

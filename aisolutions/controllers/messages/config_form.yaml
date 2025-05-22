@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: AI Message
+
+# Model Form Field configuration
+form: $/marty/aisolutions/models/aimessage/fields.yaml
+
+# Model Class name
+modelClass: Marty\AiSolutions\Models\AIMessage
+
+# Default redirect location
+defaultRedirect: marty/aisolutions/messages
+
+# Create page
+create:
+    title: Create AI Message
+    redirect: marty/aisolutions/messages/update/:id
+    redirectClose: marty/aisolutions/messages
+
+# Update page
+update:
+    title: Edit AI Message
+    redirect: marty/aisolutions/messages
+    redirectClose: marty/aisolutions/messages
+
+# Preview page
+preview:
+    title: Preview AI Message

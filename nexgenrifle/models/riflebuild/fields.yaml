@@ -1,0 +1,77 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+
+    uuid:
+        label: UUID
+        disabled: true
+
+    title:
+        label: Title
+        span: full
+        required: true
+    
+    status:
+        label: Status
+        type: dropdown
+        options:
+            draft: Draft
+            in_progress: In Progress
+            completed: Completed
+            archived: Archived
+        default: draft
+        span: left
+    
+    build_category:
+        label: Build Category
+        type: relation
+        nameFrom: name
+        span: right
+        required: true
+    
+    notes:
+        label: Notes
+        type: textarea
+        size: small
+        span: full
+
+tabs:
+    fields:
+        total_cost:
+            label: Total Cost
+            type: number
+            step: 0.01
+            readOnly: true
+            span: full
+            tab: Summary
+            
+        user:
+            label: Owner
+            type: relation
+            nameFrom: login
+            tab: Summary
+            span: full
+            readOnly: true
+        
+        rifle_items_section:
+            label: Rifle Parts
+            type: partial
+            path: $/marty/nexgenrifle/controllers/riflebuilds/_rifle_items.htm
+            tab: Parts
+
+secondaryTabs:
+    fields:
+        formatted_created_at:
+            label: Created At
+            type: text
+            disabled: true
+
+        formatted_updated_at:
+            label: Updated At
+            type: text
+            disabled: true

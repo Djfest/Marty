@@ -1,0 +1,90 @@
+{% set rifleItem = __SELF__.getRifleItem(category) %}
+{% set products = __SELF__.getProductsForCategory(category) %}
+
+<div class="part-selector" data-category="{{ category }}">
+    {% if rifleItem %}
+        <div class="selected-part">
+            <div class="part-info">
+                <div class="part-name">
+                    <strong>{{ rifleItem.product.name }}</strong>
+                    <span class="vendor">by {{ rifleItem.product.vendor.name }}</span>
+                </div>
+                <div class="part-price">${{ rifleItem.product.price|number_format(2) }}</div>
+            </div>
+            <div class="part-actions">
+                <button 
+                    class="btn btn-link"
+                    data-request="onRemovePart"
+                    data-request-data="category: '{{ category }}'"
+                    data-request-update="'@self': '#rifleBuilder'">
+                    <i class="icon-times"></i>
+                </button>
+            </div>
+        </div>
+    {% else %}
+        <div class="part-browser">
+            <div class="part-search">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Search products..."
+                    data-track-input
+                    data-request="onFilterProducts"
+                    data-request-data="category: '{{ category }}'"
+                    data-request-update="'@_products_list': '#productsContainer'"
+                >
+            </div>
+            
+            <div id="productsContainer" class="products-list">
+                {% partial '@_products_list' products=products %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.part-selector {
+    background: #f8f9fa;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.selected-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.part-info {
+    flex-grow: 1;
+}
+
+.part-name {
+    margin-bottom: 5px;
+}
+
+.part-name .vendor {
+    font-size: 12px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.part-price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.part-actions .btn {
+    padding: 0;
+    color: #dc3545;
+}
+
+.part-browser .part-search {
+    margin-bottom: 15px;
+}
+
+.products-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+</style>

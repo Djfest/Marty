@@ -1,0 +1,35 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Title
+title: Manage Knowledge Base
+
+# Link URL for each record
+recordUrl: marty/aisolutions/aiknowledgebases/update/:id
+
+# Model Class name
+modelClass: Marty\AiSolutions\Models\AiKnowledgeBase
+
+# List Structure Definition
+list: $/marty/aisolutions/models/aiknowledgebase/columns.yaml
+
+# Default sorting column
+defaultSort:
+    column: updated_at
+    direction: desc
+
+# Display page numbers with pagination, results per page
+recordsPerPage: 20
+
+# Show checkboxes next to each record
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: list_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

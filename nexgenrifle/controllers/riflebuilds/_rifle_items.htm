@@ -1,0 +1,66 @@
+<?php if (!$this->fatalError): ?>
+
+    <?= $this->relationRender('rifle_items', ['toolbarPartial' => 'rifle_items_toolbar']) ?>
+
+    <div class="form-group">
+        <div class="field-section">
+            <h4>Rifle Parts</h4>
+        </div>
+
+        <?php if ($this->formGetModel()->rifle_items && $this->formGetModel()->rifle_items->count() > 0): ?>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Part</th>
+                        <th>Quantity</th>
+                        <th class="text-right">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->formGetModel()->rifle_items as $item): ?>
+                    <tr>
+                        <td><?= e($item->product ? $item->product->name : 'Unknown') ?></td>
+                        <td><?= e($item->quantity) ?></td>
+                        <td class="text-right">
+                            $<?= number_format($item->price_override ?: ($item->product ? $item->product->price : 0), 2) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2">Total:</th>
+                        <th class="text-right">$<?= number_format($this->formGetModel()->total_cost, 2) ?></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <?php else: ?>
+        <p>No parts have been added to this rifle build yet.</p>
+        <?php endif; ?>
+
+        <div class="mt-3">
+            <button 
+                type="button" 
+                class="btn btn-primary"
+                data-control="popup"
+                data-handler="onRelationButtonCreate"
+                data-request-data="relationName: 'rifle_items'"
+                data-size="large">
+                Add Part
+            </button>
+        </div>
+    </div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+
+<?php endif ?>
+
+<script>
+    $(document).ready(function() {
+        $('#Form-field-RifleBuild-total_price').prop('readonly', true);
+    })
+</script>

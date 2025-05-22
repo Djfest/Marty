@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Product Category
+
+# Model Form Field configuration
+form: $/nexgenrifle/nexgenrifle/models/productcategory/fields.yaml
+
+# Model Class name
+modelClass: NexgenRifle\NexgenRifle\Models\ProductCategory
+
+# Default redirect location
+defaultRedirect: nexgenrifle/nexgenrifle/productcategory
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: nexgenrifle/nexgenrifle/productcategory/update/:id
+    redirectClose: nexgenrifle/nexgenrifle/productcategory
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: nexgenrifle/nexgenrifle/productcategory
+    redirectClose: nexgenrifle/nexgenrifle/productcategory
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

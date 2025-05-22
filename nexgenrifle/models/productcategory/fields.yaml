@@ -1,0 +1,49 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    group_key:
+        label: Group Key
+        span: left
+        required: true
+        comment: Used to group related categories (e.g., upper, lower, accessories)
+
+    name:
+        label: Name
+        span: right
+        required: true
+
+    slug:
+        label: Slug
+        span: auto
+        preset: name
+        required: true
+
+    order:
+        label: Sort Order
+        type: number
+        span: auto
+        default: 0
+
+tabs:
+    fields:
+        config:
+            tab: Advanced
+            label: Configuration
+            type: codeeditor
+            language: json
+            size: large
+            comment: Additional configuration in JSON format
+
+        product_catalog:
+            tab: Products
+            type: partial
+            path: $/marty/nexgenrifle/controllers/categories/_products_list.htm
+            span: full
+
+        rifle_items:
+            tab: Build Items
+            type: partial
+            path: $/marty/nexgenrifle/controllers/categories/_rifle_items_list.htm
+            span: full

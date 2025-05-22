@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Supplier
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/supplier/fields.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\Supplier
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/suppliers
+
+# Create page
+create:
+    title: Create Supplier
+    redirect: marty/nexgenrifle/suppliers/update/:id
+    redirectClose: marty/nexgenrifle/suppliers
+
+# Update page
+update:
+    title: Edit Supplier
+    redirect: marty/nexgenrifle/suppliers
+    redirectClose: marty/nexgenrifle/suppliers
+
+# Preview page
+# preview:
+#     title: Preview Supplier

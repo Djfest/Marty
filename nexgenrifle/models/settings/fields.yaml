@@ -1,0 +1,41 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    affiliate_enabled:
+        label: Enable Affiliate Tracking
+        type: switch
+        comment: Enable affiliate link tracking and revenue monitoring
+
+    default_build_category:
+        label: Default Build Category
+        type: dropdown
+        options: listBuildCategories
+        comment: The default category for new rifle builds
+
+    notification_email:
+        label: Notification Email
+        type: email
+        span: auto
+        comment: Email address for system notifications
+
+    build_options:
+        label: Build Configuration Options
+        type: codeeditor
+        size: huge
+        language: json
+        comment: Custom configuration options in JSON format
+
+    custom_css:
+        label: Custom CSS
+        type: codeeditor
+        size: large
+        language: css
+        comment: Custom CSS styles for the builder interface
+
+    tracking_code:
+        label: Analytics Tracking
+        type: textarea
+        size: small
+        comment: Custom tracking or analytics code to inject

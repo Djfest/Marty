@@ -1,0 +1,33 @@
+columns:
+    id:
+        label: ID
+        searchable: true
+        
+    profile_type_id:
+        label: Profile Type
+        relation: profile_type
+        select: name
+        searchable: true
+        
+    ai_enabled:
+        label: AI Enabled
+        type: switch
+        
+    metadata:
+        label: Metadata
+        type: text
+        searchable: true
+        
+    settings:
+        label: Settings
+        type: text
+        searchable: true
+        
+    created_at:
+        label: Created At
+        type: datetime
+        
+    updated_at:
+        label: Updated At
+        type: datetime
+        invisible: true

@@ -1,0 +1,568 @@
+openapi: 3.1.0
+info:
+  title: NexGen Rifle Builder API
+  description: |
+    API for managing data across all models with a flexible, uniform interface.
+    
+    ## Self-Describing API
+    This API implements a self-describing mechanism using ProfileTypes.
+    Each resource has an associated ProfileType that describes its structure,
+    required fields, relationships, and more. LLM systems can use this information
+    to better understand the API and assist users.
+    
+    Use the `/profile-types` endpoints to access this metadata.
+  version: 1.0.0
+
+servers:
+  - url: https://nexgenrifle.com/api/v1
+    description: Production server
+
+security:
+  - bearerAuth: []
+
+paths:
+  /resources/{resource}:
+    get:
+      operationId: listResources
+      summary: List resources of specified type
+      description: Get a list of resources of the specified type
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Resource type (e.g., build-lists, products, categories)
+        - name: sort
+          in: query
+          schema:
+            type: string
+          description: Field to sort by, prefix with - for descending order
+        - name: filter
+          in: query
+          schema:
+            type: string
+          description: Filter criteria in JSON format
+        - name: with
+          in: query
+          schema:
+            type: string
+          description: Related resources to include
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number for pagination
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+          description: Items per page for pagination
+      responses:
+        '200':
+          description: List of resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+    post:
+      operationId: createResource
+      summary: Create a new resource
+      description: Create a new resource of the specified type
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Resource type (e.g., build-lists, products, categories)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Resource data
+              properties:
+                title:
+                  type: string
+                  description: Title or name of the resource
+                description:
+                  type: string
+                  description: Detailed description
+                status:
+                  type: string
+                  description: Status of the resource
+                metadata:
+                  type: object
+                  description: Additional resource-specific data
+                related_ids:
+                  type: object
+                  description: IDs of related resources
+                config:
+                  type: object
+                  description: Configuration options
+              example:
+                title: "New Resource"
+                description: "Detailed description of the resource"
+                status: "active"
+                metadata: {
+                  "tags": ["example", "new"],
+                  "priority": 5
+                }
+      responses:
+        '201':
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+
+  /resources/{resource}/{id}:
+    get:
+      operationId: getResource
+      summary: Get a specific resource
+      description: Retrieve details of a specific resource
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Resource type (e.g., build-lists, products, categories)
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Resource ID
+        - name: with
+          in: query
+          schema:
+            type: string
+          description: Related resources to include
+      responses:
+        '200':
+          description: Resource details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+    put:
+      operationId: updateResource
+      summary: Update a resource
+      description: Update an existing resource
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Resource type (e.g., build-lists, products, categories)
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Resource ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Resource data for update
+              properties:
+                title:
+                  type: string
+                  description: Title or name of the resource
+                description:
+                  type: string
+                  description: Detailed description
+                status:
+                  type: string
+                  description: Status of the resource
+                metadata:
+                  type: object
+                  description: Additional resource-specific data
+                related_ids:
+                  type: object
+                  description: IDs of related resources
+                config:
+                  type: object
+                  description: Configuration options
+              example:
+                title: "Updated Resource"
+                status: "completed"
+                metadata: {
+                  "tags": ["updated", "example"],
+                  "priority": 3
+                }
+      responses:
+        '200':
+          description: Resource updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+    delete:
+      operationId: deleteResource
+      summary: Delete a resource
+      description: Delete a specific resource
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Resource type (e.g., build-lists, products, categories)
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Resource ID
+      responses:
+        '204':
+          description: Resource deleted
+
+  /batch:
+    post:
+      operationId: executeBatchOperations
+      summary: Execute batch operations
+      description: Process multiple operations in a single request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                operations:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BatchOperation'
+                  description: List of operations to perform
+                use_transaction:
+                  type: boolean
+                  default: true
+                  description: Whether to execute operations in a transaction
+      responses:
+        '200':
+          description: Batch operation results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      description: Results of each operation
+
+  /process:
+    post:
+      operationId: processData
+      summary: Process data with flexible actions
+      description: Generic endpoint for processing data with custom actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model:
+                  type: string
+                  description: The model to process data against
+                action:
+                  type: string
+                  description: Action to perform (create, update, filter, analyze, etc.)
+                data:
+                  type: object
+                  description: Data to process
+                options:
+                  type: object
+                  description: Additional options for processing
+              required:
+                - model
+                - action
+      responses:
+        '200':
+          description: Process results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessResponse'
+
+  /profile-types:
+    get:
+      operationId: getProfileTypes
+      summary: Get all profile types
+      description: Retrieve a list of all active profile types in the system
+      tags:
+        - ProfileTypes
+      responses:
+        '200':
+          description: List of profile types
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProfileType'
+                  message:
+                    type: string
+                    example: "Profile types retrieved successfully"
+
+  /profile-types/{resource}:
+    get:
+      operationId: getProfileType
+      summary: Get specific profile type
+      description: Retrieve detailed information about a specific profile type by resource name
+      tags:
+        - ProfileTypes
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Resource name, slug, or common term for the profile type
+      responses:
+        '200':
+          description: Profile type information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ProfileType'
+                  message:
+                    type: string
+                    example: "Profile type information retrieved successfully"
+        '404':
+          description: Profile type not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Profile type not found for resource: example"
+
+components:
+  schemas:
+    ResourceList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        _meta:
+          $ref: '#/components/schemas/ApiResponseMetadata'
+
+    ResourceResponse:
+      type: object
+      properties:
+        data:
+          type: object
+        _meta:
+          $ref: '#/components/schemas/ApiResponseMetadata'
+
+    ProcessResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Result data from processing
+        message:
+          type: string
+          description: Processing result message
+        _meta:
+          $ref: '#/components/schemas/ApiResponseMetadata'
+
+    BatchOperation:
+      type: object
+      required:
+        - method
+        - resource
+      properties:
+        method:
+          type: string
+          enum: [GET, POST, PUT, DELETE]
+          description: HTTP method to use for this operation
+        resource:
+          type: string
+          description: Resource type for this operation
+        id:
+          type: integer
+          description: Resource ID for operations that require it
+        data:
+          type: object
+          description: Data for POST or PUT operations
+        reference:
+          type: string
+          description: Custom reference to identify this operation in results
+
+    ProfileType:
+      type: object
+      properties:
+        id:
+          type: integer
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Name of the profile type
+        slug:
+          type: string
+          description: URL-friendly slug
+        description:
+          type: string
+          description: Description of the profile type
+        model_class:
+          type: string
+          description: Fully qualified class name of the model
+        type:
+          type: string
+          description: Type category (user, system, resource, etc.)
+        namespace:
+          type: string
+          description: PHP namespace of the model
+        is_active:
+          type: boolean
+          description: Whether this profile type is active
+        is_featured:
+          type: boolean
+          description: Whether this profile type is featured
+        is_default:
+          type: boolean
+          description: Whether this is a default profile type
+        ai_enabled:
+          type: boolean
+          description: Whether this profile type is enabled for AI interactions
+        icon:
+          type: string
+          description: Icon class for this profile type
+        api_endpoint:
+          type: string
+          description: API endpoint for this resource
+        api_version:
+          type: string
+          description: API version this resource uses
+        fillable_fields:
+          type: array
+          description: Fields that can be filled when creating or updating
+          items:
+            type: string
+        required_fields:
+          type: array
+          description: Fields that are required when creating or updating
+          items:
+            type: string
+        sensitive_fields:
+          type: array
+          description: Fields that contain sensitive data
+          items:
+            type: string
+        api_methods:
+          type: array
+          description: Allowed API methods for this resource
+          items:
+            type: string
+        common:
+          type: array
+          description: Common terms used to refer to this resource
+          items:
+            type: string
+        relationships:
+          type: object
+          description: Related models and their relationship descriptions
+        api_help:
+          type: object
+          description: Help information for API usage
+          properties:
+            documentation_links:
+              type: array
+              items:
+                type: string
+            example_calls:
+              type: array
+              items:
+                type: string
+            common_errors:
+              type: array
+              items:
+                type: string
+        controller_path:
+          type: string
+          description: Path to the controller for this model
+        fields_path:
+          type: string
+          description: Path to the fields.yaml file for this model
+        columns_path:
+          type: string
+          description: Path to the columns.yaml file for this model
+        migration_path:
+          type: string
+          description: Path to the migration file for this model's table
+        conversation_analysis:
+          type: object
+          description: Data for AI conversation analysis
+        tone:
+          type: string
+          description: Preferred tone for communications about this resource
+        prompt_instructions:
+          type: string
+          description: Instructions for AI prompt generation
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ApiResponseMetadata:
+      type: object
+      description: Metadata included in API responses when using ProfileType enhancement
+      properties:
+        profile_type_info:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the profile type
+            model_class:
+              type: string
+              description: Fully qualified class name of the model
+            description:
+              type: string
+              description: Description of the model
+            api_help:
+              type: object
+              description: Help information for API usage
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Resources
+    description: Generic resource management
+  - name: Batch
+    description: Batch operations
+  - name: Process
+    description: Data processing operations
+  - name: ProfileTypes
+    description: Model metadata and API documentation

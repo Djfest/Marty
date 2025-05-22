@@ -1,0 +1,136 @@
+<div data-control="toolbar">
+    <div class="btn-group">
+        <a
+            href="<?= Backend::url('marty/nexgenrifle/buildlists/create') ?>"
+            class="btn btn-primary oc-icon-plus">
+            New Build List
+        </a>
+
+        <button
+            class="btn btn-default oc-icon-list-ul"
+            data-request="onLoadTypeSelector"
+            data-request-success="$(this).next().modal('show')"
+            data-load-indicator="Loading list types...">
+            Choose List Type
+        </button>
+
+        <div class="control-popup modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Choose List Type</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-type-options">
+                            <a
+                                href="<?= Backend::url('marty/nexgenrifle/buildlists/create?type=rifle_build') ?>"
+                                class="list-type-option">
+                                <i class="icon-crosshairs"></i>
+                                <h5>Rifle Build</h5>
+                                <p>Create a new rifle build list with compatibility checking</p>
+                            </a>
+
+                            <a
+                                href="<?= Backend::url('marty/nexgenrifle/buildlists/create?type=gift_list') ?>"
+                                class="list-type-option">
+                                <i class="icon-gift"></i>
+                                <h5>Gift List</h5>
+                                <p>Create a gift list with budget tracking</p>
+                            </a>
+
+                            <a
+                                href="<?= Backend::url('marty/nexgenrifle/buildlists/create?type=project_list') ?>"
+                                class="list-type-option">
+                                <i class="icon-wrench"></i>
+                                <h5>Project List</h5>
+                                <p>Create a general project materials list</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button
+            type="button"
+            class="btn btn-default oc-icon-upload"
+            data-control="popup"
+            data-handler="onLoadImportPopup"
+            data-keyboard="false">
+            Import Lists
+        </button>
+        <button
+            type="button"
+            class="btn btn-default oc-icon-download"
+            data-request="onExportLists"
+            data-request-loading="Exporting lists...">
+            Export Lists
+        </button>
+    </div>
+
+    <?php if ($this->user->hasAccess('marty.nexgenrifle.manage_builds')): ?>
+        <div class="btn-group">
+            <button
+                class="btn btn-default oc-icon-trash-o"
+                disabled="disabled"
+                onclick="$(this).data('request-data', {
+                    checked: $('.control-list').listWidget('getChecked')
+                })"
+                data-request="onDelete"
+                data-request-confirm="Are you sure you want to delete the selected lists?"
+                data-trigger-action="enable"
+                data-trigger=".control-list input[type=checkbox]"
+                data-trigger-condition="checked"
+                data-request-success="$(this).prop('disabled', true)">
+                Delete Selected
+            </button>
+        </div>
+    <?php endif ?>
+</div>
+
+<style>
+.list-type-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 10px;
+}
+
+.list-type-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.list-type-option:hover {
+    border-color: #2980b9;
+    background: #f8f9fa;
+    text-decoration: none;
+}
+
+.list-type-option i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #2980b9;
+}
+
+.list-type-option h5 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.list-type-option p {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+}
+</style>

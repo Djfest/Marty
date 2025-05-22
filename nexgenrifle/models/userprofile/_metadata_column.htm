@@ -1,0 +1,21 @@
+<?php
+$metadata = $record->metadata ? json_decode($record->metadata, true) : [];
+$displayData = [];
+
+foreach ($metadata as $key => $value) {
+    if (is_array($value)) {
+        $value = '[Array]';
+    } elseif (is_object($value)) {
+        $value = '[Object]';
+    }
+    $displayData[] = "$key: $value";
+}
+?>
+
+<div class="metadata-preview">
+    <?php if (count($displayData)): ?>
+        <?= implode('<br>', e($displayData)) ?>
+    <?php else: ?>
+        <span class="text-muted">No additional data</span>
+    <?php endif ?>
+</div>

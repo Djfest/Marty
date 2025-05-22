@@ -1,0 +1,36 @@
+# Form configuration for AIMessages
+form:
+    fields:
+        aisession_id:
+            label: Session ID
+            type: number
+            span: left
+        type:
+            label: Type
+            type: text
+            span: left
+        context:
+            label: Context
+            type: text
+            span: right
+        code_references:
+            label: Code References
+            type: json
+            size: large
+        metadata:
+            label: Metadata
+            type: json
+            size: large
+        status:
+            label: Status
+            type: dropdown
+            options:
+                pending: Pending
+                in_progress: In Progress
+                completed: Completed
+                failed: Failed
+            span: left
+        message:
+            label: Message
+            type: textarea
+            size: large

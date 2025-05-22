@@ -1,0 +1,7 @@
+{% if record.status == 'open' %}
+    <span class="oc-status status-success">Open</span>
+{% elseif record.status == 'closed' %}
+    <span class="oc-status status-warning">Closed</span>
+{% else %}
+    <span class="oc-status status-muted">Archived</span>
+{% endif %}

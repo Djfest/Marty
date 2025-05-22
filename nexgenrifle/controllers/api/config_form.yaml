@@ -1,0 +1,26 @@
+# ===================================
+# Form Behavior Config
+# ===================================
+
+name: API Resource
+modelClass: Marty\NexGenRifle\Models\RifleBuild
+form: $/marty/nexgenrifle/models/riflebuild/fields.yaml
+
+# Model Class name
+defaultRedirect: marty/nexgenrifle/api
+
+# Create page
+create:
+    title: Create Resource
+    redirect: marty/nexgenrifle/api/update/:id
+    redirectClose: marty/nexgenrifle/api
+
+# Update page
+update:
+    title: Edit Resource
+    redirect: marty/nexgenrifle/api
+    redirectClose: marty/nexgenrifle/api
+
+# Preview page
+preview:
+    title: Preview Resource

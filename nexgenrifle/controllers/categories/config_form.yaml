@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Category
+
+# Model Class
+modelClass: Marty\NexGenRifle\Models\Category
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/categories
+
+# Create page
+create:
+    title: Create Category
+    redirect: marty/nexgenrifle/categories/update/:id
+    redirectClose: marty/nexgenrifle/categories
+
+# Update page
+update:
+    title: Edit Category
+    redirect: marty/nexgenrifle/categories
+    redirectClose: marty/nexgenrifle/categories
+
+# Preview page
+preview:
+    title: Preview Category
+
+# Form fields definition
+form: $/marty/nexgenrifle/models/category/fields.yaml

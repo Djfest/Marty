@@ -1,0 +1,14 @@
+name: Model Change
+modelClass: Marty\AiSolutions\Models\ModelChange
+form: $/marty/aisolutions/models/modelchange/fields.yaml
+defaultRedirect: marty/aisolutions/modelchanges
+
+create:
+    title: Create Model Change
+    redirect: marty/aisolutions/modelchanges/update/:id
+    redirectClose: marty/aisolutions/modelchanges
+
+update:
+    title: Edit Model Change
+    redirect: marty/aisolutions/modelchanges
+    redirectClose: marty/aisolutions/modelchanges

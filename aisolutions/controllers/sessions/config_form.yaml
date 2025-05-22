@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: AI Session
+
+# Model Form Field configuration
+form: $/marty/aisolutions/models/aisession/fields.yaml
+
+# Model Class name
+modelClass: Marty\AiSolutions\Models\AISession
+
+# Default redirect location
+defaultRedirect: marty/aisolutions/sessions
+
+# Create page
+create:
+    title: Create AI Session
+    redirect: marty/aisolutions/sessions/update/:id
+    redirectClose: marty/aisolutions/sessions
+
+# Update page
+update:
+    title: Edit AI Session
+    redirect: marty/aisolutions/sessions
+    redirectClose: marty/aisolutions/sessions
+
+# Preview page
+preview:
+    title: Preview AI Session

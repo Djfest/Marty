@@ -1,0 +1,23 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+user:
+    label: User Account
+    view:
+        form: $/rainlab/user/models/user/fields.yaml
+        toolbarButtons: link|unlink
+    manage:
+        form: $/rainlab/user/models/user/fields.yaml
+        list: $/rainlab/user/models/user/columns.yaml
+        recordsPerPage: 10
+
+rifleBuilds:
+    label: Rifle Builds
+    view:
+        list: $/marty/nexgenrifle/models/riflebuild/columns.yaml
+        toolbarButtons: create|delete
+        recordUrl: marty/nexgenrifle/riflebuilds/update/:id
+    manage:
+        showSearch: true
+        recordsPerPage: 10

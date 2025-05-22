@@ -1,0 +1,19 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('marty/aisolutions/profiletypeextensions') ?>">Profile Type Extensions</a></li>
+        <li>Preview Extension</li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <div class="form-preview">
+        <?= $this->formRenderPreview() ?>
+    </div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('marty/aisolutions/profiletypeextensions') ?>" class="btn btn-default">Return to profile type extensions list</a></p>
+
+<?php endif ?>

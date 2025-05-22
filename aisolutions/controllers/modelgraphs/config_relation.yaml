@@ -1,0 +1,12 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+profile_type:
+    label: Profile Type
+    view:
+        list: $/marty/nexgenrifle/models/profiletype/columns.yaml
+        toolbarButtons: link|unlink
+    manage:
+        list: $/marty/nexgenrifle/models/profiletype/columns.yaml
+        form: $/marty/nexgenrifle/models/profiletype/fields.yaml

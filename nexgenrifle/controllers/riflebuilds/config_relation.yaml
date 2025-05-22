@@ -1,0 +1,37 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+rifle_items: # Changed from rifleItems to rifle_items
+    label: Rifle Parts
+    view:
+        list: $/marty/nexgenrifle/models/rifleitem/columns.yaml
+        toolbarButtons: create|delete
+        recordUrl: marty/nexgenrifle/rifleitems/update/:id
+    manage:
+        form: $/marty/nexgenrifle/models/rifleitem/fields.yaml
+        recordsPerPage: 10
+    create:
+        form: $/marty/nexgenrifle/models/rifleitem/fields.yaml
+    update:
+        form: $/marty/nexgenrifle/models/rifleitem/fields.yaml
+
+user:
+    label: Owner
+    view:
+        form: ~/modules/backend/models/user/fields.yaml
+        toolbarButtons: link|unlink
+    manage:
+        form: ~/modules/backend/models/user/fields.yaml
+        list: ~/modules/backend/models/user/columns.yaml
+        recordsPerPage: 10
+
+buildCategory:
+    label: Build Category
+    view:
+        form: $/marty/nexgenrifle/models/buildcategory/fields.yaml
+        toolbarButtons: link|unlink
+    manage:
+        form: $/marty/nexgenrifle/models/buildcategory/fields.yaml
+        list: $/marty/nexgenrifle/models/buildcategory/columns.yaml
+        recordsPerPage: 10

@@ -1,0 +1,161 @@
+<?php
+/**
+ * Custom API endpoints for BuildLists
+ */
+
+public function onGetBuildListStats()
+{
+    $listId = input('list_id');
+    $list = BuildList::findOrFail($listId);
+
+    return [
+        'acquired_items' => $list->list_items()->where('status', 'acquired')->count(),
+        'total_items' => $list->list_items()->count(),
+        'current_total' => $list->current_total,
+        'remaining_budget' => $list->remaining_budget,
+        'percentage_complete' => $list->percentage_complete,
+        'days_until_target' => $list->days_until_target
+    ];
+}
+
+public function onSearchCompatibleItems()
+{
+    $listId = input('list_id');
+    $search = input('search');
+    $list = BuildList::findOrFail($listId);
+
+    if ($list->list_type !== 'rifle_build') {
+        throw new ApplicationException('This operation is only available for rifle builds');
+    }
+
+    $query = Product::where('is_active', true);
+
+    // Apply compatibility filters based on build config
+    if (!empty($list->config['compatibility'])) {
+        $platform = array_get($list->config['compatibility'], 'platform');
+        $caliber = array_get($list->config['compatibility'], 'caliber');
+
+        if ($platform) {
+            $query->whereHas('compatibility', function($q) use ($platform) {
+                $q->where('platform', $platform);
+            });
+        }
+
+        if ($caliber) {
+            $query->whereHas('compatibility', function($q) use ($caliber) {
+                $q->where('caliber', $caliber);
+            });
+        }
+    }
+
+    // Apply search term
+    if ($search) {
+        $query->where(function($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+              ->orWhere('description', 'like', "%{$search}%")
+              ->orWhere('sku', 'like', "%{$search}%");
+        });
+    }
+
+    $products = $query->paginate(20);
+
+    return [
+        'results' => $products->map(function($product) {
+            return [
+                'id' => $product->id,
+                'title' => $product->title,
+                'price' => $product->price,
+                'sku' => $product->sku,
+                'vendor' => optional($product->vendor)->name,
+                'in_stock' => $product->is_in_stock,
+                'thumbnail' => optional($product->featured_image)->getThumb(80, 80)
+            ];
+        }),
+        'pagination' => [
+            'total' => $products->total(),
+            'per_page' => $products->perPage(),
+            'current_page' => $products->currentPage(),
+            'last_page' => $products->lastPage()
+        ]
+    ];
+}
+
+public function onAddBulkItems()
+{
+    $listId = input('list_id');
+    $items = input('items');
+    $list = BuildList::findOrFail($listId);
+
+    DB::beginTransaction();
+
+    try {
+        foreach ($items as $item) {
+            $listItem = new BuildListItem;
+            $listItem->build_list_id = $list->id;
+            $listItem->product_id = array_get($item, 'product_id');
+            $listItem->title = array_get($item, 'title');
+            $listItem->price = array_get($item, 'price');
+            $listItem->quantity = array_get($item, 'quantity', 1);
+            $listItem->status = array_get($item, 'status', 'planned');
+            $listItem->priority = array_get($item, 'priority', 1);
+            $listItem->save();
+        }
+
+        $list->updateTotal();
+        DB::commit();
+
+        return [
+            'success' => true,
+            'list' => [
+                'id' => $list->id,
+                'current_total' => $list->current_total,
+                'remaining_budget' => $list->remaining_budget,
+                'total_items' => $list->list_items()->count()
+            ]
+        ];
+
+    } catch (Exception $e) {
+        DB::rollback();
+        throw $e;
+    }
+}
+
+public function onReorderItems()
+{
+    $listId = input('list_id');
+    $itemIds = input('item_ids');
+    $list = BuildList::findOrFail($listId);
+
+    DB::beginTransaction();
+
+    try {
+        foreach ($itemIds as $index => $id) {
+            BuildListItem::where('id', $id)
+                ->where('build_list_id', $listId)
+                ->update(['priority' => $index + 1]);
+        }
+
+        DB::commit();
+        return ['success' => true];
+
+    } catch (Exception $e) {
+        DB::rollback();
+        throw $e;
+    }
+}
+
+public function onUpdateListStatus()
+{
+    $listId = input('list_id');
+    $status = input('status');
+    $list = BuildList::findOrFail($listId);
+
+    $list->status = $status;
+    $list->save();
+
+    return [
+        'success' => true,
+        'status' => $status,
+        'status_label' => $list->status_label
+    ];
+}

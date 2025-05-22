@@ -1,0 +1,52 @@
+columns:
+    id:
+        label: ID
+        searchable: true
+        width: 100px
+
+    session:
+        label: Session
+        relation: session
+        select: code_session_id
+        searchable: true
+        sortable: true
+
+    context_key:
+        label: Context
+        searchable: true
+        sortable: true
+        type: partial
+        path: $/marty/aisolutions/controllers/messages/_context_column.htm
+
+    source:
+        label: Source
+        searchable: true
+        sortable: true
+
+    author:
+        label: Author
+        searchable: true
+        sortable: true
+
+    message:
+        label: Message
+        searchable: true
+        type: summary
+        sortable: false
+        width: 400px
+
+    file_path:
+        label: File
+        searchable: true
+        sortable: true
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true
+        invisible: true
+
+    updated_at:
+        label: Updated
+        type: datetime
+        sortable: true

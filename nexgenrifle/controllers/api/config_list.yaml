@@ -1,0 +1,32 @@
+# ===================================
+# List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/marty/nexgenrifle/models/buildlist/columns.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\BuildList
+
+# List Title
+title: Manage Build Lists
+
+# Default sort field
+defaultSort:
+    column: created_at
+    direction: desc
+
+# Display checkbox next to each record
+showCheckboxes: true
+
+# Records to display per page
+recordsPerPage: 20
+
+# Display page numbers with pagination, disable to improve performance
+showPagination: true
+
+# Displays the list search box above the records
+showSearch: true
+
+# Displays the sorting link on each column
+showSorting: true

@@ -1,0 +1,62 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Title
+        span: full
+        required: true
+        
+    product_category:
+        label: Category
+        type: relation
+        nameFrom: name
+        emptyOption: -- Select Category --
+        span: auto
+        
+    supplier:
+        label: Supplier
+        type: relation
+        nameFrom: name
+        emptyOption: -- Select Supplier --
+        span: auto
+
+tabs:
+    fields:
+        price:
+            label: Price
+            tab: Details
+            type: number
+            span: auto
+            
+        image_url:
+            label: Image URL
+            tab: Details
+            type: text
+            span: auto
+            
+        product_url:
+            label: Product URL
+            tab: Details
+            type: text
+            span: auto
+            
+        affiliate_click_url:
+            label: Affiliate URL
+            tab: Details
+            type: text
+            span: auto
+            
+        is_affiliate_tracked:
+            label: Affiliate Tracked
+            tab: Details
+            type: switch
+            span: auto
+            
+        config:
+            label: Configuration
+            tab: Advanced
+            type: codeeditor
+            language: json
+            span: full

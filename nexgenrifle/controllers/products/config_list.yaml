@@ -1,0 +1,68 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/marty/nexgenrifle/models/productcatalog/columns.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\ProductCatalog
+
+# List Title
+title: Manage Product Catalog
+
+# Link URL for each record
+recordUrl: marty/nexgenrifle/products/update/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# Displays the list column set up button
+showSetup: true
+
+# Show checkboxes
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    buttons: list_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt
+
+# Filter widget configuration
+filter:
+    # Filter configuration (inline filters)
+    scopes:
+        product_category:
+            label: Category
+            modelClass: Marty\NexGenRifle\Models\ProductCategory
+            nameFrom: name
+            conditions: product_category_id in (:value)
+
+        vendor:
+            label: Vendor
+            modelClass: Marty\NexGenRifle\Models\Vendor
+            nameFrom: name
+            conditions: vendor_id in (:value)
+            
+        price_range:
+            label: Price Range
+            type: group
+            conditions: price >= :min and price <= :max
+            options:
+                0-50: Under $50
+                50-100: $50 to $100
+                100-200: $100 to $200
+                200-500: $200 to $500
+                500-1000: $500 to $1000
+                1000-0: Over $1000
+                
+        is_affiliate_tracked:
+            label: Affiliate Tracking
+            type: checkbox
+            conditions: is_affiliate_tracked = true

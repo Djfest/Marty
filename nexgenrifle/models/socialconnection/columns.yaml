@@ -1,0 +1,28 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    
+    provider:
+        label: Provider
+        searchable: true
+    
+    name:
+        label: Name
+        searchable: true
+    
+    email:
+        label: Email
+        searchable: true
+    
+    expires_at:
+        label: Expires
+        type: datetime
+    
+    created_at:
+        label: Connected At
+        type: datetime

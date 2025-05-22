@@ -1,0 +1,14 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+# Define relations for ProfileTypes
+userProfiles:
+    label: User Profiles
+    view:
+        list: $/marty/nexgenrifle/models/userprofile/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/marty/nexgenrifle/models/userprofile/fields.yaml
+        recordsPerPage: 10

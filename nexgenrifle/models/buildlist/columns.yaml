@@ -1,0 +1,46 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        
+    name:
+        label: Name
+        searchable: true
+
+    list_type:
+        label: Type
+        type: text
+        searchable: true
+        
+    status:
+        label: Status
+        type: text
+        
+    current_total:
+        label: Current Total
+        type: number
+        format: $ %.2f
+        
+    total_budget:
+        label: Budget
+        type: number
+        format: $ %.2f
+        
+    percentage_complete:
+        label: Progress
+        type: partial
+        path: $/marty/nexgenrifle/models/buildlist/_percentage.htm
+        
+    created_at:
+        label: Created
+        type: datetime
+        invisible: true
+        
+    updated_at:
+        label: Updated
+        type: datetime
+        invisible: true

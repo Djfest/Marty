@@ -1,0 +1,24 @@
+# List configuration for AIMessages
+list:
+    columns:
+        id:
+            label: ID
+            type: number
+        aisession_id:
+            label: Session ID
+            type: number
+        type:
+            label: Type
+            type: text
+        context:
+            label: Context
+            type: text
+        status:
+            label: Status
+            type: text
+        created_at:
+            label: Created At
+            type: datetime
+        updated_at:
+            label: Updated At
+            type: datetime

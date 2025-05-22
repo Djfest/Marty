@@ -1,0 +1,27 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Form Controller Details
+name: Knowledge Base Entry
+form: $/marty/aisolutions/models/aiknowledgebase/fields.yaml
+modelClass: Marty\AiSolutions\Models\AiKnowledgeBase
+
+# Default redirect location
+defaultRedirect: marty/aisolutions/aiknowledgebases
+
+# Create page
+create:
+    title: Create Knowledge Base Entry
+    redirect: marty/aisolutions/aiknowledgebases/update/:id
+    redirectClose: marty/aisolutions/aiknowledgebases
+
+# Update page
+update:
+    title: Edit Knowledge Base Entry
+    redirect: marty/aisolutions/aiknowledgebases
+    redirectClose: marty/aisolutions/aiknowledgebases
+
+# Preview page (optional)
+# preview:
+#     title: Preview Knowledge Base Entry

@@ -1,0 +1,25 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+product_catalog:
+    label: Product Catalog Item
+    view:
+        list: $/marty/nexgenrifle/models/productcatalog/columns.yaml
+        toolbarButtons: link|unlink
+    form:
+        fields: $/marty/nexgenrifle/models/productcatalog/fields.yaml
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+
+build_list:
+    label: Build List
+    view:
+        list: $/marty/nexgenrifle/models/buildlist/columns.yaml
+        toolbarButtons: link|unlink
+    form:
+        fields: $/marty/nexgenrifle/models/buildlist/fields.yaml
+    manage:
+        showSearch: true
+        recordsPerPage: 10

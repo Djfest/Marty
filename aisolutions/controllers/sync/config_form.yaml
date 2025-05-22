@@ -1,0 +1,15 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Model Sync
+
+# Model Form Field configuration
+fields: ~/plugins/marty/aisolutions/controllers/sync/fields.yaml
+
+# Model Class
+modelClass: Marty\Djfest\Models\ProfileType
+
+# Form Field configuration
+form: ~/plugins/marty/aisolutions/controllers/sync/fields.yaml

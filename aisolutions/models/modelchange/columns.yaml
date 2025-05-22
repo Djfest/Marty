@@ -1,0 +1,37 @@
+columns:
+    id:
+        label: ID
+        searchable: true
+        
+    model_type:
+        label: Model Type
+        searchable: true
+        
+    model_id:
+        label: Model ID
+        searchable: true
+        
+    change_type:
+        label: Change Type
+        type: text
+        searchable: true
+        
+    changes:
+        label: Changes
+        type: text
+        searchable: true
+        
+    user_id:
+        label: User
+        relation: user
+        select: concat(first_name, ' ', last_name)
+        searchable: true
+        
+    created_at:
+        label: Created At
+        type: datetime
+        
+    updated_at:
+        label: Updated At
+        type: datetime
+        invisible: true

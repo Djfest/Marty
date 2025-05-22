@@ -1,0 +1,72 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Title
+        span: full
+        required: true
+        
+    product_catalog:
+        label: Product
+        type: relation
+        nameFrom: title
+        emptyOption: -- Select Product --
+        span: auto
+        
+    build_list:
+        label: Build List
+        type: relation
+        nameFrom: title
+        emptyOption: -- Select Build List --
+        span: auto
+
+tabs:
+    fields:
+        status:
+            label: Status
+            tab: Details
+            type: dropdown
+            options:
+                planned: Planned
+                researching: Researching
+                selected: Selected
+                ordered: Ordered
+                acquired: Acquired
+                removed: Removed
+            span: auto
+            
+        price:
+            label: Price
+            tab: Details
+            type: number
+            span: auto
+            
+        quantity:
+            label: Quantity
+            tab: Details
+            type: number
+            default: 1
+            span: auto
+            
+        priority:
+            label: Priority
+            tab: Details
+            type: number
+            default: 10
+            span: auto
+            
+        notes:
+            label: Notes
+            tab: Notes
+            type: textarea
+            size: small
+            span: full
+            
+        metadata:
+            label: Metadata
+            tab: Advanced
+            type: codeeditor
+            language: json
+            span: full

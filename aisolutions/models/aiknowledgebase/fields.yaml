@@ -1,0 +1,25 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Title
+        span: full
+    
+    profile_type:
+        label: Profile Type
+        type: relation
+        select: name
+        emptyOption: -- Select Profile Type --
+    
+    content:
+        label: Content
+        type: richeditor
+        size: huge
+        span: full
+    
+    keywords:
+        label: Keywords
+        comment: Comma-separated list of keywords to help with search and categorization
+        span: full

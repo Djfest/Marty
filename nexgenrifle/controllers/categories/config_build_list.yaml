@@ -1,0 +1,32 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/marty/nexgenrifle/models/buildcategory/columns.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\BuildCategory
+
+# List Title
+title: Manage Build Categories
+
+# Link URL for each record
+recordUrl: marty/nexgenrifle/categories/update/build/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# Show checkboxes
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    buttons: build_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

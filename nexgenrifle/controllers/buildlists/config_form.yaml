@@ -1,0 +1,17 @@
+name: Build List
+modelClass: Marty\NexGenRifle\Models\BuildList
+form: $/marty/nexgenrifle/models/buildlist/fields.yaml
+defaultRedirect: marty/nexgenrifle/buildlists
+
+create:
+    title: Create Build List
+    redirect: marty/nexgenrifle/buildlists/update/:id
+    redirectClose: marty/nexgenrifle/buildlists
+
+update:
+    title: Update Build List
+    redirect: marty/nexgenrifle/buildlists
+    redirectClose: marty/nexgenrifle/buildlists
+
+preview:
+    title: Preview Build List

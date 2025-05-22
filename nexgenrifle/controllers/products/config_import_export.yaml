@@ -1,0 +1,15 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+import:
+    title: Import Products
+    modelClass: Marty\NexGenRifle\Models\ProductCatalog
+    list: $/marty/nexgenrifle/models/productcatalog/columns.yaml
+    redirect: marty/nexgenrifle/products
+
+export:
+    title: Export Products
+    modelClass: Marty\NexGenRifle\Models\ProductCatalog
+    list: $/marty/nexgenrifle/models/productcatalog/columns.yaml
+    redirect: marty/nexgenrifle/products

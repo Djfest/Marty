@@ -1,0 +1,47 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('marty/nexgenrifle/products') ?>">Products</a></li>
+        <li>Create Product</li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="Creating Product..."
+                    class="btn btn-primary">
+                    Create
+                </button>
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="Creating Product..."
+                    class="btn btn-default">
+                    Create and Close
+                </button>
+                <span class="btn-text">
+                    or <a href="<?= Backend::url('marty/nexgenrifle/products') ?>">Cancel</a>
+                </span>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+
+    <?= $this->makePartial('~/modules/backend/behaviors/formcontroller/partials/_form_create_fatal.htm') ?>
+
+<?php endif ?>

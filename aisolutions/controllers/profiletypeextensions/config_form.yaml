@@ -1,0 +1,14 @@
+name: Profile Type Extension
+modelClass: Marty\AiSolutions\Models\ProfileTypeExtension
+form: $/marty/aisolutions/models/profiletypeextension/fields.yaml
+defaultRedirect: marty/aisolutions/profiletypeextensions
+
+create:
+    title: Create Profile Type Extension
+    redirect: marty/aisolutions/profiletypeextensions/update/:id
+    redirectClose: marty/aisolutions/profiletypeextensions
+
+update:
+    title: Edit Profile Type Extension
+    redirect: marty/aisolutions/profiletypeextensions
+    redirectClose: marty/aisolutions/profiletypeextensions

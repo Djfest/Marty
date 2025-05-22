@@ -1,0 +1,112 @@
+{% if not __SELF__.hasActiveBuild() %}
+    <div class="no-build-message">
+        <h3>No Active Build</h3>
+        <p>Start by creating a new rifle build or loading an existing one.</p>
+    </div>
+{% else %}
+    <div class="rifle-group lower-receiver">
+        <h3>Lower Receiver Assembly</h3>
+        
+        <div class="part-selection">
+            <!-- Lower Receiver Part Selection -->
+            <div class="part-category">
+                <div class="part-header">
+                    <h4>Lower Receiver</h4>
+                    <span class="status">Required</span>
+                </div>
+                {% partial '@part_selector' category='lower_receiver' %}
+            </div>
+
+            <!-- Buffer Tube Assembly -->
+            <div class="part-category">
+                <div class="part-header">
+                    <h4>Buffer Tube Assembly</h4>
+                    <span class="status">Required</span>
+                </div>
+                {% partial '@part_selector' category='buffer_tube' %}
+            </div>
+
+            <!-- Grip Selection -->
+            <div class="part-category">
+                <div class="part-header">
+                    <h4>Pistol Grip</h4>
+                    <span class="status">Required</span>
+                </div>
+                {% partial '@part_selector' category='grip' %}
+            </div>
+
+            <!-- Trigger Group -->
+            <div class="part-category">
+                <div class="part-header">
+                    <h4>Trigger Assembly</h4>
+                    <span class="status">Required</span>
+                </div>
+                {% partial '@part_selector' category='trigger' %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<style>
+.rifle-group {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.rifle-group h3 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    color: #444;
+}
+
+.part-category {
+    margin-bottom: 25px;
+}
+
+.part-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.part-header h4 {
+    margin: 0;
+    color: #555;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #e9ecef;
+    color: #666;
+}
+
+.status.required {
+    background: #fef5e7;
+    color: #c67605;
+}
+
+.no-build-message {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.no-build-message h3 {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.no-build-message p {
+    color: #888;
+    margin: 0;
+}
+</style>

@@ -1,0 +1,38 @@
+fields:
+    model_type:
+        label: Model Type
+        span: auto
+        required: true
+        type: text
+        
+    model_id:
+        label: Model ID
+        span: auto
+        required: true
+        type: number
+        
+    change_type:
+        label: Change Type
+        span: full
+        required: true
+        type: dropdown
+        options:
+            create: Create
+            update: Update
+            delete: Delete
+            
+tabs:
+    fields:
+        changes:
+            tab: Changes
+            label: Changes
+            type: codeeditor
+            size: giant
+            language: json
+            
+        user:
+            tab: User
+            label: User
+            type: relation
+            nameFrom: name
+            span: full

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Rifle Item
+
+# Model Form Field configuration
+form: $/nexgenrifle/nexgenrifle/models/rifleitem/fields.yaml
+
+# Model Class name
+modelClass: NexgenRifle\NexgenRifle\Models\RifleItem
+
+# Default redirect location
+defaultRedirect: nexgenrifle/nexgenrifle/rifleitem
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: nexgenrifle/nexgenrifle/rifleitem/update/:id
+    redirectClose: nexgenrifle/nexgenrifle/rifleitem
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: nexgenrifle/nexgenrifle/rifleitem
+    redirectClose: nexgenrifle/nexgenrifle/rifleitem
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

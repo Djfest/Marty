@@ -1,0 +1,11 @@
+<?php
+$statusClass = [
+    'draft' => 'default',
+    'in_progress' => 'warning',
+    'completed' => 'success',
+    'archived' => 'info'
+][$record->status] ?? 'default';
+?>
+<span class="oc-icon-circle text-<?= $statusClass ?>">
+    <?= ucwords(str_replace('_', ' ', $record->status)) ?>
+</span>

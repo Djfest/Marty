@@ -1,0 +1,26 @@
+<div data-control="toolbar">
+    <a 
+        href="javascript:;" 
+        class="btn btn-sm btn-secondary oc-icon-plus"
+        data-control="popup"
+        data-handler="onRelationButtonAdd"
+        data-request-data="manage_id: '<?= $this->params[0] ?>'"
+        data-size="large">
+        Add Item
+    </a>
+
+    <button
+        class="btn btn-sm btn-danger oc-icon-trash-o"
+        disabled="disabled"
+        onclick="$(this).data('request-data', {
+            checked: $('.control-list').listWidget('getChecked')
+        })"
+        data-request="onRelationButtonDelete"
+        data-request-confirm="Delete selected items?"
+        data-trigger-action="enable"
+        data-trigger=".control-list input[type=checkbox]"
+        data-trigger-condition="checked"
+        data-stripe-load-indicator>
+        Remove
+    </button>
+</div>

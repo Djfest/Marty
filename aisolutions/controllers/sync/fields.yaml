@@ -1,0 +1,27 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    sync_options:
+        label: Sync Options
+        type: section
+
+    sync_all:
+        label: Sync All Models
+        type: switch
+        default: true
+        comment: Enable to sync all available models
+
+    specific_models:
+        label: Select Models
+        type: checkboxlist
+        depends: [sync_all]
+        trigger:
+            action: disable
+            field: sync_all
+            condition: checked
+        options:
+            modelClass: \Marty\Djfest\Models\ProfileType
+            keyFrom: id
+            nameFrom: name

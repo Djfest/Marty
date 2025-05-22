@@ -1,0 +1,31 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    user:
+        label: User
+        relation: user
+        select: concat(first_name, ' ', last_name)
+        searchable: true
+        sortable: true
+
+    rifle_builds_count:
+        label: Builds
+        relation: rifle_builds
+        useRelationCount: true
+        sortable: true
+
+    metadata:
+        label: Additional Data
+        type: partial
+        path: $/marty/nexgenrifle/models/userprofile/_metadata_column.htm
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true

@@ -1,0 +1,18 @@
+<?php
+    $value = $value ?: 0;
+    $min = $field->getConfig('min', 0);
+    $max = $field->getConfig('max', 100);
+    $disabled = $field->getConfig('disabled', false);
+?>
+<div class="form-control-meter">
+    <meter
+        id="<?= $field->getId() ?>"
+        name="<?= $field->getName() ?>"
+        min="<?= e($min) ?>"
+        max="<?= e($max) ?>"
+        value="<?= e($value) ?>"
+        <?php if ($disabled): ?>disabled<?php endif ?>
+        style="width: 100%; height: 20px;"
+    ></meter>
+    <span class="meter-value" style="margin-left: 10px;"><?= e(round($value)) ?>%</span>
+</div>

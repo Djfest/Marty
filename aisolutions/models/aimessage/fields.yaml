@@ -1,0 +1,45 @@
+fields:
+    aisession_id:
+        label: Session
+        type: relation
+        nameFrom: title
+        select: title
+        emptyOption: '-- Select Session --'
+
+    context_key:
+        label: Context
+        span: auto
+        type: dropdown
+        options:
+            debugging: Debugging
+            solution: Solution
+            insight: Insight
+            question: Question
+            error: Error
+
+    source:
+        label: Source
+        span: auto
+        type: dropdown
+        options:
+            gpt: GPT
+            cline: Cline
+            copilot: Copilot
+            manual: Manual
+
+    author:
+        label: Author
+        span: auto
+        type: text
+
+    file_path:
+        label: File Path
+        span: full
+        type: text
+
+    message:
+        label: Message
+        size: huge
+        type: codeeditor
+        language: markdown
+        theme: twilight

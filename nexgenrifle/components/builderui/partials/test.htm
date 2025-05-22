@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexGenRifle Builder UI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .nexgen-header {
+      background: linear-gradient(to right, #131313, #1c1c1c);
+      border-bottom: 1px solid #333;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .title-badge {
+      color: #56e39f;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .category-pill {
+      background-color: transparent;
+      border: 1px solid rgba(86, 227, 159, 0.5);
+      border-radius: 30px;
+      padding: 6px 15px;
+      color: #56e39f;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    .category-container {
+      background-color: #111111;
+      border-radius: 8px;
+      padding: 0;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border: 1px solid #222;
+      overflow: hidden;
+    }
+    .category-header {
+      background: linear-gradient(to right, #131313, #1c1c1c);
+      padding: 15px 20px;
+      border-bottom: 1px solid #222;
+      font-weight: 500;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .category-body {
+      padding: 0;
+    }
+    .component-row {
+      padding: 15px 20px;
+      border-bottom: 1px solid #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .component-row:last-child {
+      border-bottom: none;
+    }
+    .component-row:hover {
+      background-color: #151515;
+    }
+    .component-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .component-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #202020;
+      border-radius: 6px;
+      color: #56e39f;
+    }
+    .component-details h5 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+    }
+    .component-details p {
+      margin: 3px 0 0 0;
+      font-size: 0.8rem;
+      color: #888;
+    }
+    .price-tag {
+      background-color: #1c1c1c;
+      border: 1px solid #333;
+      color: #56e39f;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    .action-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      color: #888;
+      transition: all 0.2s;
+      margin-left: 5px;
+    }
+    .action-btn:hover {
+      background-color: #252525;
+      color: #fff;
+    }
+    .selection-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .status-selected {
+      background-color: #56e39f;
+    }
+    .status-pending {
+      background-color: #888;
+    }
+    .status-required {
+      background-color: #e74c3c;
+    }
+    .save-bar {
+      position: sticky;
+      bottom: 0;
+      background: linear-gradient(to right, #131313, #1c1c1c);
+      padding: 20px;
+      border-top: 1px solid #333;
+      z-index: 100;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .save-btn {
+      background-color: #56e39f;
+      color: #0a0a0a;
+      border: none;
+      font-weight: 500;
+      padding: 10px 25px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .save-btn:hover {
+      background-color: #4bd28f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(86, 227, 159, 0.3);
+    }
+    .tooltip-inner {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid p-0">
+    <div class="nexgen-header mb-4">
+      <span class="title-badge">NexGenRifle Builder UI</span>
+      <div class="d-flex align-items-center">
+        <span class="text-light me-2">Total:</span>
+        <span class="price-tag ms-2" id="header-total-price">$534.95</span>
+      </div>
+    </div>
+
+    <div class="container py-3">
+      <div class="text-center mb-4">
+        <p class="mb-2">Select and organize your AR-15 build by category</p>
+        <div class="d-flex justify-content-center mb-4">
+          <div class="category-pill">
+            <i class="bi bi-check-circle me-1"></i> AR-15 Platform
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Receiver Group -->
+      <div class="category-container">
+        <div class="category-header">
+          <h4 class="mb-0">Lower Receiver Group</h4>
+          <span class="price-tag">$329.00</span>
+        </div>
+        <div class="category-body">
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-selected"></div>
+              <div class="component-icon">
+                <i class="bi bi-layers"></i>
+              </div>
+              <div class="component-details">
+                <h5>Stripped Lower Receiver</h5>
+                <p>Base frame of the lower receiver assembly</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$129.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-pencil"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-selected"></div>
+              <div class="component-icon">
+                <i class="bi bi-tools"></i>
+              </div>
+              <div class="component-details">
+                <h5>Lower Parts Kit (LPK)</h5>
+                <p>Includes internal parts like trigger, safety, springs, and pins</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$89.99</span>
+              <button type="button" class="action-btn"><i class="bi bi-pencil"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-selected"></div>
+              <div class="component-icon">
+                <i class="bi bi-arrow-left-right"></i>
+              </div>
+              <div class="component-details">
+                <h5>Buffer Kit</h5>
+                <p>Contains buffer, tube, and spring for recoil system</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$65.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-pencil"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-pending"></div>
+              <div class="component-icon">
+                <i class="bi bi-bricks"></i>
+              </div>
+              <div class="component-details">
+                <h5>Stock</h5>
+                <p>Rear-end of the rifle resting against the shoulder</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$45.01</span>
+              <button type="button" class="action-btn"><i class="bi bi-pencil"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upper Receiver Group -->
+      <div class="category-container">
+        <div class="category-header">
+          <h4 class="mb-0">Upper Receiver Group</h4>
+          <span class="price-tag">$139.99</span>
+        </div>
+        <div class="category-body">
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-pending"></div>
+              <div class="component-icon">
+                <i class="bi bi-grid"></i>
+              </div>
+              <div class="component-details">
+                <h5>Upper Receiver</h5>
+                <p>Top part of rifle, houses BCG and barrel interface</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$139.99</span>
+              <button type="button" class="action-btn"><i class="bi bi-pencil"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-required"></div>
+              <div class="component-icon">
+                <i class="bi bi-capsule"></i>
+              </div>
+              <div class="component-details">
+                <h5>Barrel</h5>
+                <p>The core of the rifle that directs bullet travel</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$0.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-plus"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-required"></div>
+              <div class="component-icon">
+                <i class="bi bi-grip-horizontal"></i>
+              </div>
+              <div class="component-details">
+                <h5>Handguard</h5>
+                <p>Covers barrel and provides mounting rails</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$0.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-plus"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-required"></div>
+              <div class="component-icon">
+                <i class="bi bi-gear"></i>
+              </div>
+              <div class="component-details">
+                <h5>Bolt Carrier Group (BCG)</h5>
+                <p>Chambers, fires, and extracts the round</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$0.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-plus"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommended Tools -->
+      <div class="category-container">
+        <div class="category-header">
+          <h4 class="mb-0">Recommended Tools</h4>
+          <span class="price-tag">$75.95</span>
+        </div>
+        <div class="category-body">
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-selected"></div>
+              <div class="component-icon">
+                <i class="bi bi-wrench"></i>
+              </div>
+              <div class="component-details">
+                <h5>Armorer's Wrench</h5>
+                <p>Multi-purpose tool for AR-15 assembly</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$75.95</span>
+              <button type="button" class="action-btn"><i class="bi bi-pencil"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-pending"></div>
+              <div class="component-icon">
+                <i class="bi bi-lock"></i>
+              </div>
+              <div class="component-details">
+                <h5>Vise Blocks (Upper & Lower)</h5>
+                <p>Secures components during build process</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$0.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-plus"></i></button>
+            </div>
+          </div>
+          
+          <div class="component-row">
+            <div class="component-info">
+              <div class="selection-status status-pending"></div>
+              <div class="component-icon">
+                <i class="bi bi-hammer"></i>
+              </div>
+              <div class="component-details">
+                <h5>Pin Punch Set</h5>
+                <p>Helps with clean pin installation/removal</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="price-tag me-3">$0.00</span>
+              <button type="button" class="action-btn"><i class="bi bi-plus"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <span class="text-light me-2">Total:</span>
+            <span class="price-tag ms-2 fs-5">$534.95</span>
+          </div>
+          <button type="button" class="save-btn">
+            <i class="bi bi-check2 me-2"></i>Save Build & Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Enable tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+  </script>
+</body>
+</html>

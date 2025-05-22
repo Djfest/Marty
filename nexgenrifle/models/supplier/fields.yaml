@@ -1,0 +1,155 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        span: left
+        type: number
+        disabled: true
+        comment: System-generated unique identifier.
+
+    name:
+        label: Supplier Name
+        span: left
+        required: true
+        type: text
+        comment: The primary name of the supplier.
+
+    slug:
+        label: Slug
+        span: right
+        type: text
+        preset:
+            field: name
+            type: slug
+        readOnly: true
+        comment: Auto-generated from name, used in URLs.
+
+    logo:
+        label: Logo
+        span: right # Adjusted span for better layout with name/slug
+        type: fileupload
+        mode: image
+        imageHeight: 100
+        imageWidth: 100
+        comment: Upload the supplier's logo.
+
+    is_active:
+        label: Active
+        span: left
+        type: switch
+        default: true
+        comment: Is this supplier currently active for general use?
+
+    is_enabled:
+        label: Enabled (System)
+        span: right
+        type: switch
+        default: true
+        comment: Is this supplier enabled in the system (e.g., for API access)?
+
+    description:
+        label: Description / Notes
+        span: full
+        type: textarea
+        size: small
+        comment: A brief description or internal notes about the supplier.
+
+tabs:
+    fields:
+        website_url:
+            tab: URLs & Contact
+            label: Main Website URL
+            span: left
+            type: text
+            comment: e.g., https://example.com
+
+        base_url:
+            tab: URLs & Contact
+            label: API Base URL
+            span: right
+            type: text
+            comment: For API integrations, if applicable.
+
+        contact_name:
+            tab: URLs & Contact
+            label: Contact Person
+            span: left
+            type: text
+
+        contact_email:
+            tab: URLs & Contact
+            label: Contact Email
+            span: right
+            type: text
+            comment: Primary contact email address.
+
+        contact_phone:
+            tab: URLs & Contact
+            label: Contact Phone
+            span: full
+            type: text
+
+        is_affiliate:
+            tab: Affiliate Details
+            label: Affiliate Partner
+            span: left
+            type: switch
+            default: false
+            comment: Is this supplier an affiliate partner?
+
+        affiliate_program:
+            tab: Affiliate Details
+            label: Has Affiliate Program
+            span: right
+            type: switch
+            default: false
+            comment: Does this supplier offer an affiliate program?
+
+        affiliate_url:
+            tab: Affiliate Details
+            label: Default Affiliate URL
+            span: full
+            type: text
+            comment: The primary affiliate link for this supplier.
+
+        address_street:
+            tab: Address
+            label: Street Address
+            span: full
+            type: text
+
+        address_city:
+            tab: Address
+            label: City
+            span: left
+            type: text
+
+        address_state:
+            tab: Address
+            label: State / Province
+            span: right
+            type: text
+
+        address_zip:
+            tab: Address
+            label: ZIP / Postal Code
+            span: left
+            type: text
+
+        address_country:
+            tab: Address
+            label: Country
+            span: right
+            type: text
+
+        metadata:
+            tab: Advanced
+            label: Metadata
+            type: codeeditor
+            language: json
+            size: large
+            span: full
+            comment: JSON formatted additional data for programmatic use.

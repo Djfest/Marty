@@ -1,0 +1,174 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: true
+        type: text
+
+    description:
+        label: Description
+        span: full
+        size: large
+        type: textarea
+
+    list_type:
+        label: List Type
+        span: auto
+        required: true
+        type: dropdown
+        options:
+            rifle_build: Rifle Build
+            gift_list: Gift List
+            project_list: Project List
+        trigger:
+            action: show
+            field: list_type
+            condition: value[rifle_build]
+
+    status:
+        label: Status
+        span: auto
+        type: dropdown
+        options:
+            planning: Planning
+            in_progress: In Progress
+            completed: Completed
+            on_hold: On Hold
+            archived: Archived
+
+    user:
+        label: User
+        nameFrom: login
+        descriptionFrom: email
+        span: auto
+        required: true
+        type: relation
+
+tabs:
+    fields:
+        target_date:
+            tab: Details
+            label: Target Date
+            span: auto
+            type: datepicker
+            mode: date
+
+        total_budget:
+            tab: Details
+            label: Total Budget
+            span: auto
+            type: number
+            step: 0.01
+
+        current_total:
+            tab: Details
+            label: Current Total
+            span: auto
+            type: number
+            step: 0.01
+            disabled: true
+
+        percentage_complete:
+            tab: Details
+            label: Progress
+            span: auto
+            type: number # Changed from meter for diagnostics
+            min: 0
+            max: 100
+            disabled: true
+            comment: 'Was type: meter, changed for diagnostics'
+
+        config:
+            tab: Settings
+            label: Configuration
+            type: nestedform
+            usePanelStyles: true
+            form:
+                fields:
+                    notifications[price_alerts]:
+                        label: Price Alerts
+                        type: switch
+                        default: true
+                        comment: Receive notifications for price changes
+
+                    notifications[availability_alerts]:
+                        label: Availability Alerts
+                        type: switch
+                        default: true
+                        comment: Receive notifications when items become available
+
+                    notifications[approaching_target]:
+                        label: Target Date Reminders
+                        type: switch
+                        default: true
+                        comment: Receive reminders as target date approaches
+
+                    display[show_prices]:
+                        label: Show Prices
+                        type: switch
+                        default: true
+                        comment: Display price information in lists
+
+                    display[show_progress]:
+                        label: Show Progress
+                        type: switch
+                        default: true
+                        comment: Display progress indicators
+
+                    sorting[default]:
+                        label: Default Sort
+                        type: dropdown
+                        options:
+                            priority: Priority
+                            price: Price
+                            name: Name
+                            status: Status
+
+                    sorting[grouping]:
+                        label: Group By
+                        type: dropdown
+                        options:
+                            none: None
+                            status: Status
+                            vendor: Vendor
+                            category: Category
+
+        # Rifle Build specific fields
+        compatibility_settings:
+            tab: Rifle Settings
+            label: Compatibility
+            type: nestedform
+            trigger:
+                action: show
+                field: list_type
+                condition: value[rifle_build]
+            form:
+                fields:
+                    platform:
+                        label: Platform
+                        type: dropdown
+                        options:
+                            ar15: AR-15
+                            ar10: AR-10
+                            custom: Custom
+                    
+                    caliber:
+                        label: Caliber
+                        type: text
+
+                    requirements:
+                        label: Special Requirements
+                        type: taglist
+
+secondaryTabs:
+    fields:
+        list_items:
+            tab: Items
+            type: partial
+            path: ~/plugins/marty/nexgenrifle/controllers/buildlists/_list_items.htm
+
+        notes:
+            tab: Notes
+            type: richeditor
+            size: huge
+            span: full

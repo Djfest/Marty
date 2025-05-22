@@ -1,0 +1,38 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    rifle_build:
+        label: Build
+        relation: rifle_build
+        select: title
+        searchable: true
+        sortable: true
+
+    user:
+        label: User
+        relation: rifle_build.user
+        select: concat(first_name, ' ', last_name)
+        sortable: true
+
+    status:
+        label: Status
+        relation: rifle_build
+        select: status
+        sortable: true
+
+    serial_number:
+        label: Serial
+        relation: product_item
+        select: serial_number
+        searchable: true
+
+    created_at:
+        label: Added
+        type: datetime
+        sortable: true

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Product
+
+# Model Form Field configuration
+form: $/marty/nexgenrifle/models/productcatalog/fields.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\ProductCatalog
+
+# Default redirect location
+defaultRedirect: marty/nexgenrifle/products
+
+# Create page
+create:
+    title: Create Product
+    redirect: marty/nexgenrifle/products/update/:id
+    redirectClose: marty/nexgenrifle/products
+
+# Update page
+update:
+    title: Edit Product
+    redirect: marty/nexgenrifle/products
+    redirectClose: marty/nexgenrifle/products
+
+# Preview page
+preview:
+    title: Preview Product

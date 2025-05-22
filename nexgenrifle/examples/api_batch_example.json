@@ -1,0 +1,46 @@
+{
+    "operations": [
+        {
+            "method": "POST",
+            "resource": "vendors",
+            "data": {
+                "name": "New Vendor Example",
+                "slug": "new-vendor-example",
+                "base_url": "https://example.com",
+                "is_enabled": true,
+                "metadata": {
+                    "contact_email": "sales@example.com",
+                    "phone": "555-0123",
+                    "shipping_info": {
+                        "free_shipping_threshold": 100,
+                        "expedited_available": true
+                    }
+                }
+            }
+        },
+        {
+            "method": "POST",
+            "resource": "products",
+            "data": {
+                "title": "Example Rifle Part",
+                "product_category_id": 1,
+                "vendor_id": "{response.0.id}",
+                "price": 149.99,
+                "image_url": "https://example.com/images/part.jpg",
+                "product_url": "https://example.com/products/rifle-part",
+                "config": {
+                    "specifications": {
+                        "weight": "0.5 lbs",
+                        "material": "Aircraft Grade Aluminum",
+                        "color": "Black"
+                    },
+                    "compatibility": {
+                        "platforms": ["AR-15", "M4"],
+                        "requirements": ["MIL-SPEC Buffer Tube"]
+                    }
+                }
+            }
+        }
+    ],
+    "use_transaction": true
+}

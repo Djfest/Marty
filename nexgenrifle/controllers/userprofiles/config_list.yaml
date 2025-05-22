@@ -1,0 +1,33 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/marty/nexgenrifle/models/userprofile/columns.yaml
+
+# Model Class name
+modelClass: Marty\NexGenRifle\Models\UserProfile
+
+# List Title
+title: Manage User Profiles
+
+# Link URL for each record
+recordUrl: marty/nexgenrifle/userprofiles/update/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# Display checkboxes next to each record
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: list_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

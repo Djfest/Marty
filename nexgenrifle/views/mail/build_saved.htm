@@ -1,0 +1,79 @@
+subject = "Your rifle build '{{ build.title }}' has been saved"
+description = "Sent to users when they save their rifle build"
+==
+
+<h2>Build Saved Successfully</h2>
+
+<p>Hello {{ user.first_name }},</p>
+
+<p>Your rifle build "{{ build.title }}" has been saved successfully.</p>
+
+<h3>Build Details:</h3>
+<ul>
+    <li>Status: {{ build.status|title }}</li>
+    <li>Total Cost: ${{ build.total_cost|number_format(2) }}</li>
+    <li>Last Updated: {{ build.updated_at|date('M j, Y g:i A') }}</li>
+</ul>
+
+<h3>Parts List:</h3>
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background: #f5f5f5;">
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Part</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Vendor</th>
+            <th style="padding: 10px; text-align: right; border: 1px solid #ddd;">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in build.rifle_items %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ item.product.name }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ item.product.vendor.name }}</td>
+                <td style="padding: 10px; text-align: right; border: 1px solid #ddd;">${{ item.product.price|number_format(2) }}</td>
+            </tr>
+        {% endfor %}
+        <tr style="background: #f9f9f9;">
+            <td colspan="2" style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Total</td>
+            <td style="padding: 10px; text-align: right; border: 1px solid #ddd; font-weight: bold;">${{ build.total_cost|number_format(2) }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<p style="margin-top: 20px;">
+    <a href="{{ 'builder'|page({ id: build.id }) }}" style="display: inline-block; padding: 10px 20px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">View Build</a>
+</p>
+
+<hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+<p style="color: #666; font-size: 12px;">
+    This is an automated message. Please do not reply to this email.
+    If you have any questions, please contact customer support.
+</p>
+
+==
+
+{% partial 'plain-text' %}
+    Build Saved Successfully
+
+    Hello {{ user.first_name }},
+
+    Your rifle build "{{ build.title }}" has been saved successfully.
+
+    Build Details:
+    - Status: {{ build.status|title }}
+    - Total Cost: ${{ build.total_cost|number_format(2) }}
+    - Last Updated: {{ build.updated_at|date('M j, Y g:i A') }}
+
+    Parts List:
+    {% for item in build.rifle_items %}
+    * {{ item.product.name }} by {{ item.product.vendor.name }} - ${{ item.product.price|number_format(2) }}
+    {% endfor %}
+
+    Total: ${{ build.total_cost|number_format(2) }}
+
+    View your build at: {{ 'builder'|page({ id: build.id }) }}
+
+    ---
+    This is an automated message. Please do not reply to this email.
+    If you have any questions, please contact customer support.
+{% endpartial %}

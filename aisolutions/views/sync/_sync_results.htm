@@ -1,0 +1,41 @@
+<div class="callout callout-success">
+    <div class="header">
+        <i class="icon-check"></i>
+        <h3>Sync Results</h3>
+    </div>
+    <div class="content">
+        <p>Successfully synced: <?= $successCount ?> models</p>
+        <?php if ($errorCount > 0): ?>
+            <p class="text-danger">Failed to sync: <?= $errorCount ?> models</p>
+        <?php endif; ?>
+        
+        <?php if (!empty($results)): ?>
+            <div class="table-container">
+                <table class="table data">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Status</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($results as $result): ?>
+                            <tr class="<?= $result['status'] === 'success' ? 'success' : 'error' ?>">
+                                <td><?= e($result['model']) ?></td>
+                                <td>
+                                    <?php if ($result['status'] === 'success'): ?>
+                                        <span class="text-success"><i class="icon-check"></i> Success</span>
+                                    <?php else: ?>
+                                        <span class="text-danger"><i class="icon-times"></i> Error</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?= e($result['message']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('marty/aisolutions/sync') ?>">Model Sync</a></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php Block::put('body') ?>
+    <div class="layout" data-control="sync-controller">
+        <div class="padded-container">
+            <?= Form::open(['class' => 'layout']) ?>
+                <div class="form-buttons">
+                    <div class="loading-indicator-container">
+                        <div id="syncResults">
+                            <?= $this->makePartial('sync/_sync_results') ?>
+                        </div>
+                    </div>
+                </div>
+            <?= Form::close() ?>
+        </div>
+    </div>
+
+    <?= $this->makePartial('~/modules/backend/partials/_session_timeout.htm') ?>
+<?php Block::endPut() ?>

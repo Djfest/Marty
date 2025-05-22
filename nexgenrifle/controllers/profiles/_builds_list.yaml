@@ -1,0 +1,41 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+
+    title:
+        label: Title
+        searchable: true
+        sortable: true
+
+    build_category:
+        label: Category
+        relation: build_category
+        select: name
+        sortable: true
+
+    status:
+        label: Status
+        type: partial
+        path: $/marty/nexgenrifle/models/riflebuild/_status_column.htm
+        sortable: true
+
+    rifle_items_count:
+        label: Items
+        relation: rifle_items
+        useRelationCount: true
+        sortable: true
+
+    total_cost:
+        label: Cost
+        type: price
+        sortable: true
+
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true

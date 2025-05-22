@@ -1,0 +1,23 @@
+<div data-control="toolbar">
+    <a
+        href="<?= Backend::url('marty/nexgenrifle/products/create') ?>"
+        class="btn btn-primary oc-icon-plus">
+        New Product
+    </a>
+    
+    <a
+        href="<?= Backend::url('marty/nexgenrifle/products/import') ?>"
+        class="btn btn-default oc-icon-upload">
+        Import Products
+    </a>
+    
+    <button
+        class="btn btn-danger oc-icon-trash-o"
+        data-request="onDelete"
+        data-request-confirm="Are you sure you want to delete the selected products?"
+        data-list-checked-trigger
+        data-list-checked-request
+        data-stripe-load-indicator>
+        Delete Selected
+    </button>
+</div>

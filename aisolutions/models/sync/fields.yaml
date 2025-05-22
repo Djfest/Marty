@@ -1,0 +1,34 @@
+fields:
+    namespace:
+        label: Namespace
+        type: text
+        span: left
+        placeholder: e.g., Marty\AiSolutions
+        
+    model_name:
+        label: Model Name
+        type: text
+        span: right
+        placeholder: e.g., User
+        
+    sync_status:
+        label: Sync Status
+        type: dropdown
+        options:
+            pending: Pending
+            syncing: Syncing
+            completed: Completed
+            failed: Failed
+        span: left
+        
+    last_synced_at:
+        label: Last Synced
+        type: datepicker
+        mode: datetime
+        span: right
+        
+    metadata:
+        label: Metadata
+        type: codeeditor
+        size: huge
+        language: json

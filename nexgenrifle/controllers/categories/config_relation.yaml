@@ -1,0 +1,14 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+# Define the relations for Categories
+productCatalogs:
+    label: Products
+    view:
+        list: $/marty/nexgenrifle/models/productcatalog/columns.yaml
+        toolbarButtons: link|unlink
+        recordsPerPage: 10
+    manage:
+        showSearch: true
+        recordsPerPage: 10
